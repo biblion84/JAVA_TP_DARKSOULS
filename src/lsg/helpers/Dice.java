@@ -11,6 +11,8 @@ public class Dice {
         this.random = new Random();
     }
 
+    public int getFaces(){ return this.faces;}
+
     public int roll() {
         return random.nextInt((this.faces - 1) + 1);
     }

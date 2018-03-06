@@ -24,7 +24,8 @@ public class Weapon {
     }
 
     public void use() {
-        this.durability-=1;
+
+        this.setDurability(this.durability - 1);
     }
 
     public boolean isBroken() {
@@ -52,6 +53,11 @@ public class Weapon {
     }
 
     private void setDurability(int durability) {
-        this.durability = durability;
+        if (durability < 0){
+            this.durability = 0;
+        } else {
+            this.durability = durability;
+        }
+
     }
 }
