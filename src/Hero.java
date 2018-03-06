@@ -17,18 +17,23 @@ public class Hero {
         this("Ynovator");
     }
 
-    public String printStat() {
-        String stat = "[ Hero ]\t"+this.name+"\tLIFE: "+this.life+"\tSTAMINA: "+this.life;
-        System.out.println(stat);
-        return stat;
+    public String printStats() {
+        String isAlive = this.isAlive() ? "ALIVE" : "DEAD";
+        String stats = "[ Hero ]\t"+this.name+"\tLIFE: "+this.life+"\tSTAMINA: "+this.life+"\t"+isAlive;
+        System.out.println(stats);
+        return stats;
     }
 
     public String toString() {
-        return printStat();
+        return printStats();
+    }
+
+    public boolean isAlive() {
+        return this.life > 0;
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void setName(String name) {
@@ -36,7 +41,7 @@ public class Hero {
     }
 
     public int getLife() {
-        return life;
+        return this.life;
     }
 
     public void setLife(int life) {
@@ -44,7 +49,7 @@ public class Hero {
     }
 
     public int getMaxLife() {
-        return maxLife;
+        return this.maxLife;
     }
 
     public void setMaxLife(int maxLife) {
@@ -52,7 +57,7 @@ public class Hero {
     }
 
     public int getStamina() {
-        return stamina;
+        return this.stamina;
     }
 
     public void setStamina(int stamina) {
@@ -60,7 +65,7 @@ public class Hero {
     }
 
     public int getMaxStamina() {
-        return maxStamina;
+        return this.maxStamina;
     }
 
     public void setMaxStamina(int maxStamina) {
