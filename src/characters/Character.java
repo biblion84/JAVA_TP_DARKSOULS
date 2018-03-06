@@ -20,11 +20,10 @@ public class Character {
     public String toString() {
         String isAlive = this.isAlive() ? "ALIVE" : "DEAD";
         String[] stats = {this.getClass().getSimpleName(), this.name, "LIFE: " + this.life, "STAMINA: "+this.stamina, isAlive};
-        return String.format("%s %s %s %s %s",this.getClass().getSimpleName(), this.name, "LIFE: " + this.life, "STAMINA: "+this.stamina, isAlive);
+        return String.format("%-20s %-20s %-20s %-20s %-20s", "[" + this.getClass().getSimpleName() +"]", this.name, "LIFE: " + this.life, "STAMINA: "+this.stamina, isAlive);
     }
 
     public int attackWith(Weapon weapon){
-
         if (weapon.isBroken()) return 0;
 
         int damage = weapon.getMinDamage();
@@ -32,9 +31,18 @@ public class Character {
         damage += precision;
 
         if (damage > weapon.getMaxDamage()){
-            return weapon.getMaxDamage();
+            damage = weapon.getMaxDamage();
         }
 
+        if (this.stamina < weapon.getStamCost()){
+            damage *= Math.round(this.stamina/weapon.getStamCost());
+        }
+
+        if (damage < weapon.getMinDamage()){
+            damage = weapon.getMinDamage();
+        }
+
+        this.stamina -= weapon.getStamCost();
         return damage;
     }
 
