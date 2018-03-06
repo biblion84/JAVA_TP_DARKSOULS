@@ -17,6 +17,10 @@ public class Character {
         return this.toString();
     }
 
+    public void attack() {
+        this.attackWith(weapon);
+    }
+
     public String toString() {
         String isAlive = this.isAlive() ? "ALIVE" : "DEAD";
         String[] stats = {this.getClass().getSimpleName(), this.name, "LIFE: " + this.life, "STAMINA: "+this.stamina, isAlive};
@@ -94,5 +98,13 @@ public class Character {
 
     public void setMaxStamina(int maxStamina) {
         this.maxStamina = maxStamina;
+    }
+
+    public Weapon getWeapon() {
+        return weapon;
+    }
+
+    public void setWeapon(Weapon weapon) {
+        this.weapon = weapon;
     }
 }
