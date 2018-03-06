@@ -3,6 +3,7 @@ package lsg;
 import characters.Hero;
 import characters.Monster;
 import lsg.weapons.Sword;
+import lsg.weapons.Weapon;
 
 public class LearningSoulsGame {
 
@@ -11,19 +12,16 @@ public class LearningSoulsGame {
         // TODO créer le hero
         Hero hero = new Hero("hero1");
         Monster monster = new Monster("monster1");
-        hero.setWeapon(new Sword());
-        monster.setWeapon(new Sword());
+        Weapon sword = new Sword();
+        hero.setWeapon(sword);
+        monster.setWeapon(sword);
         System.out.println(hero);
         System.out.println(monster);
         hero.attack();
         System.out.println(hero);
         monster.attack();
         System.out.println(monster);
-
-//        hero.printStats();
-//        //hero.printStat
-//        for (int i = 0; i < 10; i++){
-//            new Monster().printStats();
-//        }
+        System.out.println(sword.getDurability());
     }
+
 }

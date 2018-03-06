@@ -40,16 +40,10 @@ public class Character {
 
         if (this.stamina < weapon.getStamCost()){
             float modifier = this.stamina/weapon.getStamCost();
-//            if (modifier < 0.5){
-//                modifier = (float)0.5;
-//            }
             damage = Math.round(damage * modifier);
         }
 
-//        if (damage < weapon.getMinDamage()){
-//            damage = weapon.getMinDamage();
-//        }
-
+        weapon.use();
         this.setStamina(stamina - weapon.getStamCost());
         return damage;
     }
