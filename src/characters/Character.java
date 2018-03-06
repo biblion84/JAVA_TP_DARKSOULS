@@ -17,8 +17,8 @@ public class Character {
         return this.toString();
     }
 
-    public void attack() {
-        this.attackWith(weapon);
+    public int attack() {
+        return this.attackWith(this.weapon);
     }
 
     public String toString() {
@@ -53,6 +53,21 @@ public class Character {
         return this.life > 0;
     }
 
+    public int getHitWith(int value) {
+        int newLife = this.life - value;
+        int realDamage = newLife < 1 ? this.life : value;
+        this.setLife(newLife);
+        return realDamage;
+    }
+
+    public int getHitWith(Character opponent) {
+        int damages = opponent.attack();
+        int realDamages = this.getHitWith(damages);
+        System.out.println("!!! "+this.name+" attacks "+opponent.name+" with " +
+                this.weapon.getName()+ " ("+ damages +") !!! -> Effective DMG: "+realDamages+ " PV");
+        return realDamages;
+    }
+
     public String getName() {
         return this.name;
     }
@@ -66,7 +81,11 @@ public class Character {
     }
 
     public void setLife(int life) {
-        this.life = life;
+        if (life < 0){
+            this.life = 0;
+        } else {
+            this.life = life;
+        }
     }
 
     public int getMaxLife() {
