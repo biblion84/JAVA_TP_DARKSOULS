@@ -1,11 +1,16 @@
 package characters;
 
+import lsg.helpers.Dice;
+import lsg.weapons.Weapon;
+
 public class Character {
     protected String name;
     protected int life;
     protected int maxLife;
     protected int stamina;
     protected int maxStamina;
+    protected Dice attackDice = new Dice(101);
+    protected Weapon weapon;
 
     public String printStats() {
         System.out.println(this.toString());
@@ -17,6 +22,22 @@ public class Character {
         String[] stats = {this.getClass().getSimpleName(), this.name, "LIFE: " + this.life, "STAMINA: "+this.stamina, isAlive};
         return String.format("%s %s %s %s %s",this.getClass().getSimpleName(), this.name, "LIFE: " + this.life, "STAMINA: "+this.stamina, isAlive);
     }
+
+    public int attackWith(Weapon weapon){
+
+        if (weapon.isBroken()) return 0;
+
+        int damage = weapon.getMinDamage();
+        int precision = this.attackDice.roll();
+        damage += precision;
+
+        if (damage > weapon.getMaxDamage()){
+            return weapon.getMaxDamage();
+        }
+
+        return damage;
+    }
+
 
     public boolean isAlive() {
         return this.life > 0;
