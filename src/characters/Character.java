@@ -64,8 +64,8 @@ public class Character {
     public int getHitWith(Character opponent) {
         int damages = opponent.attack();
         int realDamages = this.getHitWith(damages);
-        System.out.println("!!! "+this.name+" attacks "+opponent.name+" with " +
-                this.weapon.getName()+ " ("+ damages +") !!! -> Effective DMG: "+realDamages+ " PV");
+        System.out.println("!!! "+opponent.name+" attacks "+this.name+" with " +
+                opponent.weapon.getName()+ " ("+ damages +") !!! -> Effective DMG: "+realDamages+ " PV");
         return realDamages;
     }
 

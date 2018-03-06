@@ -1,8 +1,11 @@
 package lsg;
 
+import characters.Character;
 import characters.Hero;
 import characters.Monster;
+import lsg.weapons.Claw;
 import lsg.weapons.ShotGun;
+import lsg.weapons.Sword;
 
 import java.util.Scanner;
 
@@ -19,36 +22,59 @@ public class LearningSoulsGame {
 
     private void fight1v1(){
         this.refresh();
-        boolean ended = false;
-        while (!ended){
-            System.out.println("Appuyez sur entrée pour lancer le tour");
+        Character winner = null;
+        do {
+            System.out.println("Appuyez sur entrée pour lancer le tour suivant");
             this.scanner.nextLine();
+            this.monster.getHitWith(hero);
+            if (!this.monster.isAlive()){
+                this.refresh();
+                winner = this.hero;
+                continue;
+            }
+            this.hero.getHitWith(monster);
+            if (!this.hero.isAlive()){
+                winner = this.monster;
+            }
+        } while (this.hero.isAlive() && this.monster.isAlive());
 
+        System.out.println(winner.getName()+ " est vainqueur !!");
+    }
 
-        }
+    private void init(){
+        this.monster = new Monster();
+        this.hero = new Hero();
 
+        this.hero.setWeapon(new Sword());
+        this.monster.setWeapon(new Claw());
 
+    }
 
+    public void play_v1(){
+        this.init();
+        this.fight1v1();
     }
 
     public static void main(String[] args) {
 
-        // TODO créer le hero
-        Hero hero = new Hero("rick");
-        Monster monster = new Monster("zombie");
-        hero.setWeapon(new ShotGun());
-        monster.setWeapon(new ShotGun());
-        System.out.println(hero);
-        System.out.println(monster);
-        monster.getHitWith(hero);
-        System.out.println(monster);
-
-//        hero.printStats();
-//        //hero.printStat
-        for (int i = 0; i < 100; i++){
-        monster.getHitWith(hero);
-
-//            new Monster().printStats();
-        }
+        LearningSoulsGame game = new LearningSoulsGame();
+        game.play_v1();
+//        // TODO créer le hero
+//        Hero hero = new Hero("rick");
+//        Monster monster = new Monster("zombie");
+//        hero.setWeapon(new ShotGun());
+//        monster.setWeapon(new ShotGun());
+//        System.out.println(hero);
+//        System.out.println(monster);
+//        monster.getHitWith(hero);
+//        System.out.println(monster);
+//
+////        hero.printStats();
+////        //hero.printStat
+//        for (int i = 0; i < 100; i++){
+//        monster.getHitWith(hero);
+//
+////            new Monster().printStats();
+//        }
     }
 }
