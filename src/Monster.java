@@ -7,6 +7,10 @@ public class Monster {
     private int stamina;
     private int maxStamina;
 
+    /**
+     * Constructeur qui instancie un monstre avec les charactéristique par défaut
+     * @param name le nom du monstre
+     */
     public Monster(String name){
         this.name = name;
         this.life = 10;
@@ -14,8 +18,14 @@ public class Monster {
         this.stamina = 10;
         this.maxStamina = 10;
     }
+
+    /**
+     * Constructeur par défaut retournant un monstre
+     * nommé Monster_N + le numéro d'instanciation du monstre
+     */
     public Monster(){
         this("Monster_" + Monster.INSTANCE_COUNT);
+        Monster.INSTANCE_COUNT++;
     }
 
     public String getName() {
