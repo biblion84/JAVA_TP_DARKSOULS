@@ -11,3 +11,5 @@ Car nous devons communiquer seulement au sein du même  package.
 #7 Packages
 
 La visibilité optimale est public dans ce cas, c'est la seule permettant l'accès à isAlive() depuis l'exterieur
+
+Début TP2
