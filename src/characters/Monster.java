@@ -1,13 +1,7 @@
 package characters;
 
-public class Monster {
+public class Monster extends Character {
     private static int INSTANCE_COUNT = 0;
-
-    private String name;
-    private int life;
-    private int maxLife;
-    private int stamina;
-    private int maxStamina;
 
     /**
      * Constructeur qui instancie un monstre avec les charactéristique par défaut
@@ -28,60 +22,5 @@ public class Monster {
     public Monster(){
         this("Monster_" + Monster.INSTANCE_COUNT);
         Monster.INSTANCE_COUNT++;
-    }
-
-    public String printStats() {
-        String isAlive = this.isAlive() ? "ALIVE" : "DEAD";
-        String stats = "[ Monster ]\t"+this.name+"\tLIFE: "+this.life+"\tSTAMINA: "+this.life+"\t"+isAlive;
-        System.out.println(stats);
-        return stats;
-    }
-
-    public String toString() {
-        return printStats();
-    }
-
-    public boolean isAlive() {
-        return this.life > 0;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getLife() {
-        return life;
-    }
-
-    public void setLife(int life) {
-        this.life = life;
-    }
-
-    public int getMaxLife() {
-        return maxLife;
-    }
-
-    public void setMaxLife(int maxLife) {
-        this.maxLife = maxLife;
-    }
-
-    public int getStamina() {
-        return stamina;
-    }
-
-    public void setStamina(int stamina) {
-        this.stamina = stamina;
-    }
-
-    public int getMaxStamina() {
-        return maxStamina;
-    }
-
-    public void setMaxStamina(int maxStamina) {
-        this.maxStamina = maxStamina;
     }
 }

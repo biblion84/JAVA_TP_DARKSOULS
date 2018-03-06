@@ -13,3 +13,5 @@ Car nous devons communiquer seulement au sein du même  package.
 La visibilité optimale est public dans ce cas, c'est la seule permettant l'accès à isAlive() depuis l'exterieur
 
 Début TP2
+
+Il faut passer les attributs des character en protected car ils doivent être visibles aux classes filles
