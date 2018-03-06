@@ -7,9 +7,13 @@ public class Hero {
 
     public Hero(String name){
         this.name = name;
+        this.life = 100;
+        this.maxLife = 100;
+        this.stamina = 50;
+        this.maxStamina = 50;
     }
     public Hero(){
-        this.name = "Ynovator";
+        this("Ynovator");
     }
 
     public String getName() {
