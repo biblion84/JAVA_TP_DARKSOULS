@@ -12,21 +12,37 @@ public class Character {
     protected Dice attackDice = new Dice(101);
     protected Weapon weapon;
 
+    /**
+     * Affiche les stats du character
+     * @return
+     */
     public String printStats() {
         System.out.println(this.toString());
         return this.toString();
     }
 
+    /**
+     * Renvois les dégats effectué lors de l'attaque
+     * @return
+     */
     public int attack() {
         return this.attackWith(this.weapon);
     }
 
+    /**
+     * Retourne les stats formatés du character
+     * @return
+     */
     public String toString() {
         String isAlive = this.isAlive() ? "ALIVE" : "DEAD";
         String[] stats = {this.getClass().getSimpleName(), this.name, "LIFE: " + this.life, "STAMINA: "+this.stamina, isAlive};
         return String.format("%-20s %-20s %-20s %-20s %-20s", "[" + this.getClass().getSimpleName() +"]", this.name, "LIFE: " + this.life, "STAMINA: "+this.stamina, isAlive);
     }
 
+    /**
+     * @param weapon
+     * @return les dégats calculé celon les formules, précision et stamina du character prisent en compte
+     */
     public int attackWith(Weapon weapon){
         if (weapon.isBroken()) return 0;
 
@@ -49,11 +65,19 @@ public class Character {
         return damage;
     }
 
-
+    /**
+     * Retourne si le character est vivant
+     * @return
+     */
     public boolean isAlive() {
         return this.life > 0;
     }
 
+    /**
+     * Reçoit un certain nombre de dommages
+     * @param value
+     * @return
+     */
     public int getHitWith(int value) {
         int newLife = this.life - value;
         int realDamage = newLife < 1 ? this.life : value;
@@ -61,6 +85,11 @@ public class Character {
         return realDamage;
     }
 
+    /**
+     * Méthode proxy de getHitWith permettant de récupérer les 2 opposants afin de les prints de manière formatée
+     * @param opponent
+     * @return
+     */
     public int getHitWith(Character opponent) {
         int damages = opponent.attack();
         int realDamages = this.getHitWith(damages);
