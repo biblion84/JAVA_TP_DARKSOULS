@@ -29,7 +29,7 @@ public class Weapon {
     }
 
     public boolean isBroken() {
-        return this.durability < 1;
+        return this.durability == 0;
     }
 
     public String getName() {

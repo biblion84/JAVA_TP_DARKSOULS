@@ -31,7 +31,8 @@ public class Character {
         if (weapon.isBroken()) return 0;
 
         int damage = weapon.getMinDamage();
-        int precision = Math.round ((this.attackDice.roll() / this.attackDice.getFaces()) * 100);
+        int normalizedWeaponDamage = weapon.getMaxDamage() - weapon.getMinDamage();
+        int precision = Math.round ((this.attackDice.roll() * 100)/ this.attackDice.getFaces()) * normalizedWeaponDamage / 100;
         damage += precision;
 
         if (damage > weapon.getMaxDamage()){
