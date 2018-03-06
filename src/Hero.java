@@ -5,15 +5,26 @@ public class Hero {
     private int stamina;
     private int maxStamina;
 
-    public Hero(String name){
+    public Hero(String name) {
         this.name = name;
         this.life = 100;
         this.maxLife = 100;
         this.stamina = 50;
         this.maxStamina = 50;
     }
-    public Hero(){
+
+    public Hero() {
         this("Ynovator");
+    }
+
+    public String printStat() {
+        String stat = "[ Hero ]\t"+this.name+"\tLIFE: "+this.life+"\tSTAMINA: "+this.life;
+        System.out.println(stat);
+        return stat;
+    }
+
+    public String toString() {
+        return printStat();
     }
 
     public String getName() {
