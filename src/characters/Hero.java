@@ -1,3 +1,5 @@
+package characters;
+
 public class Hero {
     private String name;
     private int life;

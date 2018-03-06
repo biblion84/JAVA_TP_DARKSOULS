@@ -1,3 +1,5 @@
+package characters;
+
 public class Monster {
     private static int INSTANCE_COUNT = 0;
 
@@ -26,6 +28,21 @@ public class Monster {
     public Monster(){
         this("Monster_" + Monster.INSTANCE_COUNT);
         Monster.INSTANCE_COUNT++;
+    }
+
+    public String printStats() {
+        String isAlive = this.isAlive() ? "ALIVE" : "DEAD";
+        String stats = "[ Monster ]\t"+this.name+"\tLIFE: "+this.life+"\tSTAMINA: "+this.life+"\t"+isAlive;
+        System.out.println(stats);
+        return stats;
+    }
+
+    public String toString() {
+        return printStats();
+    }
+
+    public boolean isAlive() {
+        return this.life > 0;
     }
 
     public String getName() {
