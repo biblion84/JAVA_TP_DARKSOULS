@@ -3,7 +3,7 @@ package characters;
 public class Monster extends Character {
     private static int INSTANCE_COUNT = 0;
 
-    private float skinThickness;
+    protected float skinThickness;
 
     /**
      * Constructeur qui instancie un monstre avec les charactéristique par défaut

@@ -2,6 +2,7 @@ package lsg;
 
 import characters.Character;
 import characters.Hero;
+import characters.Lycanthrope;
 import characters.Monster;
 import lsg.armor.ArmorItem;
 import lsg.armor.BlackWitchVeil;
@@ -54,7 +55,7 @@ public class LearningSoulsGame {
 
     }
 
-    public void play_v1(){
+    public void play_v1(){%
         this.init();
         this.fight1v1();
     }
@@ -67,10 +68,16 @@ public class LearningSoulsGame {
         this.fight1v1();
     }
 
+    public void play_v3(){
+        this.init();
+        this.monster = new Lycanthrope();
+        this.fight1v1();
+    }
+
     public static void main(String[] args) {
 
         LearningSoulsGame game = new LearningSoulsGame();
-        game.play_v2();
+        game.play_v3();
 //        Hero hero = new Hero("rick");
 //        ArmorItem veil = new BlackWitchVeil();
 //        hero.setArmorItem(veil, 2);
