@@ -20,3 +20,8 @@ Il faut passer les attributs des character en protected car ils doivent être vi
 
 La durabilité de l'épée change car lorsqu'elle est passée en paramêtre elle est passée par
 référence et non pas valeur, c'est donc l'épée de départ qui est utilisée et pas une copie.
+
+#TP3
+
+4.2 : compute protection est une méthode abstraite, ce qui veut dire qu'elle doit être implémenté par toute les
+classes filles de Character, hors elle n'est pas encore implémenté dans Hero ou Monster.

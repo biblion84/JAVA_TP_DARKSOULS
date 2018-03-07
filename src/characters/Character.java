@@ -3,7 +3,7 @@ package characters;
 import lsg.helpers.Dice;
 import lsg.weapons.Weapon;
 
-public class Character {
+public abstract class Character {
     protected String name;
     protected int life;
     protected int maxLife;
@@ -36,7 +36,14 @@ public class Character {
     public String toString() {
         String isAlive = this.isAlive() ? "ALIVE" : "DEAD";
         String[] stats = {this.getClass().getSimpleName(), this.name, "LIFE: " + this.life, "STAMINA: "+this.stamina, isAlive};
-        return String.format("%-20s %-20s %-20s %-20s %-20s", "[" + this.getClass().getSimpleName() +"]", this.name, "LIFE: " + this.life, "STAMINA: "+this.stamina, isAlive);
+        return String.format(
+                "%-20s %-20s %-20s %-20s %-20s %-20s",
+                "[" + this.getClass().getSimpleName() +"]",
+                this.name,
+                "LIFE: " + this.life,
+                "STAMINA: "+this.stamina,
+                "PROTECTION:" + this.computeProtection(),
+                isAlive);
     }
 
     /**
@@ -73,14 +80,25 @@ public class Character {
         return this.life > 0;
     }
 
+    private int computeDamageTaken(int damageDealed){
+        int damageTaken = damageDealed;
+        if (this.computeProtection() > 100){
+            damageTaken = 0;
+        } else {
+            damageTaken = Math.round( damageTaken - (damageTaken *  (this.computeProtection() /100)));
+        }
+        return damageTaken;
+    }
+
     /**
      * Reçoit un certain nombre de dommages
-     * @param value
+     * @param damageDealed
      * @return
      */
-    public int getHitWith(int value) {
-        int newLife = this.life - value;
-        int realDamage = newLife < 1 ? this.life : value;
+    public int getHitWith(int damageDealed) {
+        damageDealed = computeDamageTaken(damageDealed);
+        int newLife = this.life - damageDealed;
+        int realDamage = newLife < 1 ? this.life : damageDealed;
         this.setLife(newLife);
         return realDamage;
     }
@@ -153,4 +171,6 @@ public class Character {
     public void setWeapon(Weapon weapon) {
         this.weapon = weapon;
     }
+
+    public abstract float computeProtection();
 }

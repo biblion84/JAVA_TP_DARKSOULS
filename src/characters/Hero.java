@@ -59,4 +59,8 @@ public class Hero  extends Character{
         return armorSummary;
     }
 
+    public float computeProtection(){
+        return this.getTotalArmor();
+    }
+
 }
