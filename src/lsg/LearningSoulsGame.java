@@ -55,7 +55,7 @@ public class LearningSoulsGame {
 
     }
 
-    public void play_v1(){%
+    public void play_v1(){  
         this.init();
         this.fight1v1();
     }
