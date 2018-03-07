@@ -3,8 +3,9 @@ package lsg;
 import characters.Character;
 import characters.Hero;
 import characters.Monster;
+import lsg.armor.ArmorItem;
+import lsg.armor.BlackWitchVeil;
 import lsg.weapons.Claw;
-import lsg.weapons.ShotGun;
 import lsg.weapons.Sword;
 
 import java.util.Scanner;
@@ -20,15 +21,16 @@ public class LearningSoulsGame {
         System.out.println(monster);
     }
 
+
     private void fight1v1(){
-        this.refresh();
         Character winner = null;
         do {
+            this.refresh();
             System.out.println("Appuyez sur entrée pour lancer le tour suivant");
             this.scanner.nextLine();
             this.monster.getHitWith(hero);
+
             if (!this.monster.isAlive()){
-                this.refresh();
                 winner = this.hero;
                 continue;
             }
@@ -37,7 +39,7 @@ public class LearningSoulsGame {
                 winner = this.monster;
             }
         } while (this.hero.isAlive() && this.monster.isAlive());
-
+        this.refresh();
         System.out.println(winner.getName()+ " est vainqueur !!");
     }
 
@@ -58,9 +60,13 @@ public class LearningSoulsGame {
     public static void main(String[] args) {
 
         LearningSoulsGame game = new LearningSoulsGame();
-        game.play_v1();
+//        game.play_v1();
 //        // TODO créer le hero
-//        Hero hero = new Hero("rick");
+        Hero hero = new Hero("rick");
+        ArmorItem veil = new BlackWitchVeil();
+        hero.setArmorItem(veil, 2);
+        System.out.println(hero.armorToString());
+
 //        Monster monster = new Monster("zombie");
 //        hero.setWeapon(new ShotGun());
 //        monster.setWeapon(new ShotGun());
