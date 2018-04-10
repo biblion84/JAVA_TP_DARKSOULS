@@ -1,5 +1,7 @@
 package lsg.characters;
 
+import lsg.bags.Bag;
+import lsg.bags.SmallBag;
 import lsg.buffs.BuffItem;
 import lsg.consumables.Consumable;
 import lsg.consumables.drinks.Drink;
@@ -18,6 +20,12 @@ public abstract class Character {
     protected Weapon weapon;
     protected BuffItem[] buffItems;
     protected Consumable Consumable;
+    private Bag bag;
+
+    public Character() {
+        this.bag = new SmallBag;
+    }
+
     /**
      * Affiche les stats du character
      * @return
