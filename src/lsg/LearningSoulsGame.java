@@ -1,7 +1,5 @@
 package lsg;
 
-import lsg.buffs.rings.Ring;
-import lsg.buffs.rings.RingOfDeath;
 import lsg.buffs.rings.RingOfSwords;
 import lsg.characters.Character;
 import lsg.characters.Hero;
@@ -10,9 +8,8 @@ import lsg.characters.Monster;
 import lsg.armor.BlackWitchVeil;
 import lsg.armor.DragonSlayerLeggings;
 import lsg.armor.RingedKnightArmor;
-import lsg.consumables.Consumable;
 import lsg.consumables.MenuBestOfV1;
-import lsg.consumables.Consumable;
+import lsg.consumables.MenuBestOfV2;
 import lsg.consumables.food.Food;
 import lsg.consumables.food.Hamburger;
 import lsg.weapons.Claw;
@@ -91,6 +88,12 @@ public class LearningSoulsGame {
         System.out.println(c);
     }
 
+    private void menuBestOfV2(){
+        this.init();
+        MenuBestOfV2 c = new MenuBestOfV2();
+        System.out.println(c);
+    }
+
     private void createExhautedHero(){
         this.hero = new Hero();
         this.hero.getHitWith(99);
@@ -106,7 +109,8 @@ public class LearningSoulsGame {
     public static void main(String[] args) {
 
         LearningSoulsGame game = new LearningSoulsGame();
-        game.menuBestOfV1();
+        game.menuBestOfV2();
+//        game.menuBestOfV1();
 //        game.play_v3();
 //        Hero hero = new Hero("rick");
 //        ArmorItem veil = new BlackWitchVeil();
