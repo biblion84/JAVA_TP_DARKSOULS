@@ -10,6 +10,8 @@ import lsg.characters.Monster;
 import lsg.armor.BlackWitchVeil;
 import lsg.armor.DragonSlayerLeggings;
 import lsg.armor.RingedKnightArmor;
+import lsg.consumables.food.Food;
+import lsg.consumables.food.Hamburger;
 import lsg.weapons.Claw;
 import lsg.weapons.Sword;
 
@@ -74,6 +76,8 @@ public class LearningSoulsGame {
         this.init();
         this.monster = new Lycanthrope();
         this.hero.setBuffItems(new RingOfSwords(), 1);
+        Food f = new Hamburger();
+        this.hero.use(f);
         this.fight1v1();
     }
 

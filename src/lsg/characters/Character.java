@@ -1,6 +1,9 @@
 package lsg.characters;
 
 import lsg.buffs.BuffItem;
+import lsg.consumables.Consumable;
+import lsg.consumables.drinks.Drink;
+import lsg.consumables.food.Food;
 import lsg.helpers.Dice;
 import lsg.weapons.Weapon;
 
@@ -172,6 +175,8 @@ public abstract class Character {
     public void setLife(int life) {
         if (life < 0){
             this.life = 0;
+        } else if (life > this.getMaxLife()){
+            this.life = this.getMaxLife();
         } else {
             this.life = life;
         }
@@ -192,8 +197,11 @@ public abstract class Character {
     public void setStamina(int stamina) {
         if (stamina < 0){
             this.stamina = 0;
+        } else if (stamina > this.getMaxStamina()){
+            this.stamina = this.getMaxStamina();
         } else {
             this.stamina = stamina;
+
         }
     }
 
@@ -220,4 +228,24 @@ public abstract class Character {
     public BuffItem[] getBuffItems(){
         return this.buffItems;
     };
+
+    private void drink(Drink drink){
+        int drinkStamina = drink.use();
+        this.setStamina(this.getStamina() + drinkStamina);
+        System.out.println(String.format("%s drinks %s", this.getName(), drink));
+    }
+
+    private void eat(Food food){
+        System.out.println(String.format("%s eats %s", this.getName(), food));
+        int foodLife =  food.use();
+        this.setLife(this.getLife() + foodLife);
+    }
+
+    public void use(Consumable consumable){
+        if(consumable instanceof Drink){
+            this.drink((Drink)consumable);
+        } else if (consumable instanceof Food){
+            this.eat((Food)consumable);
+        }
+    }
 }
