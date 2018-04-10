@@ -17,6 +17,7 @@ public abstract class Character {
     protected Dice attackDice = new Dice(101);
     protected Weapon weapon;
     protected BuffItem[] buffItems;
+    protected Consumable Consumable;
     /**
      * Affiche les stats du character
      * @return
@@ -261,5 +262,17 @@ public abstract class Character {
         this.weapon.repairWith(kit);
         System.out.println(this);
         System.out.println(String.format("Après utilisation : %s %s", this.name, kit));
+    }
+
+    public Consumable getConsumable() {
+        return Consumable;
+    }
+
+    public void setConsumable(Consumable consumable) {
+        Consumable = consumable;
+    }
+
+    public void consume(){
+        this.use(getConsumable());
     }
 }
