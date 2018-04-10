@@ -35,7 +35,7 @@ public abstract class Character {
         }
     }
 
-    Collectible pullOut(Collectible item) {
+    public Collectible pullOut(Collectible item) {
         Collectible col = this.bag.pop(item);
         if ( col != null) {
             System.out.println(String.format("%s pulls out %s", getName(), item));
@@ -43,6 +43,10 @@ public abstract class Character {
             System.out.println(String.format("%s don't have this item : %s", getName(), item));
         }
         return col;
+    }
+
+    public void printBag() {
+        System.out.println(this.bag);
     }
 
     /**
