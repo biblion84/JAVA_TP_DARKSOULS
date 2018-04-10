@@ -84,6 +84,12 @@ public class LearningSoulsGame {
         this.fight1v1();
     }
 
+    private void play_v4(){
+        this.init();
+        createExhautedHero();
+        aTable();
+    }
+
     private void menuBestOfV1(){
         this.init();
         MenuBestOfV1 c = new MenuBestOfV1();
@@ -110,14 +116,12 @@ public class LearningSoulsGame {
 
     private void aTable(){
         MenuBestOfV4 bestOf = new MenuBestOfV4();
-        this.hero = new Hero();
         for(Consumable item : bestOf){
-            hero.use(item);
+            this.hero.use(item);
         }
     }
 
     private void createExhautedHero(){
-        this.hero = new Hero();
         this.hero.getHitWith(99);
         this.hero.setWeapon(new Weapon("Grosse Arme", 0,0,1000,100));
         this.hero.attack();
@@ -127,7 +131,8 @@ public class LearningSoulsGame {
     public static void main(String[] args) {
 
         LearningSoulsGame game = new LearningSoulsGame();
-        game.aTable();
+        game.play_v4();
+//        game.aTable();
 //        game.menuBestOfV4();
 //        game.menuBestOfV3();
 //        game.menuBestOfV2();
