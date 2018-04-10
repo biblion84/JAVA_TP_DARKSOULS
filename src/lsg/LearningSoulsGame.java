@@ -10,10 +10,12 @@ import lsg.characters.Monster;
 import lsg.armor.BlackWitchVeil;
 import lsg.armor.DragonSlayerLeggings;
 import lsg.armor.RingedKnightArmor;
+import lsg.consumables.Consumable;
 import lsg.consumables.food.Food;
 import lsg.consumables.food.Hamburger;
 import lsg.weapons.Claw;
 import lsg.weapons.Sword;
+import lsg.weapons.Weapon;
 
 import java.util.Scanner;
 
@@ -79,6 +81,18 @@ public class LearningSoulsGame {
         Food f = new Hamburger();
         this.hero.use(f);
         this.fight1v1();
+    }
+
+    private Hero createExhautedHero(){
+        this.hero = new Hero();
+        this.hero.getHitWith(99);
+        this.hero.setWeapon(new Weapon("Grosse Arme", 0,0,1000,100));
+        this.hero.attack();
+        System.out.println(hero);
+    }
+
+    private void aTable(){
+        
     }
 
     public static void main(String[] args) {
