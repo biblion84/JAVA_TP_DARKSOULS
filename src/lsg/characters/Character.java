@@ -231,15 +231,19 @@ public abstract class Character {
     };
 
     private void drink(Drink drink){
+        System.out.println(String.format("%s drinks %s", this.getName(), drink));
         int drinkStamina = drink.use();
         this.setStamina(this.getStamina() + drinkStamina);
-        System.out.println(String.format("%s drinks %s", this.getName(), drink));
+        System.out.println(this);
+        System.out.println(String.format("Après utilisation : %s", drink));
     }
 
     private void eat(Food food){
         System.out.println(String.format("%s eats %s", this.getName(), food));
         int foodLife =  food.use();
         this.setLife(this.getLife() + foodLife);
+        System.out.println(this);
+        System.out.println(String.format("Après utilisation : %s", food));
     }
 
     public void use(Consumable consumable){

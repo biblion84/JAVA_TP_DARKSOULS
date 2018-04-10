@@ -26,7 +26,7 @@ public abstract class Consumable {
         return stat;
     }
 
-    public String getPlurial() {
+    private String getPlural() {
 	    if (getCapacity() > 1) {
 	        return "s";
         }else {
@@ -46,7 +46,7 @@ public abstract class Consumable {
 
     @Override
 	public String toString() {
-		return String.format(Locale.US, "%s [%d %s point%s]", getName(), getCapacity(), getStat(), getPlurial()) ;
+		return String.format(Locale.US, "%s [%d %s point%s]", getName(), getCapacity(), getStat(), getPlural()) ;
 	}
 	
 }
