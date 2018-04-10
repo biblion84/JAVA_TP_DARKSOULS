@@ -30,7 +30,19 @@ public abstract class Character {
     public void pickUp(Collectible item) {
         if (this.bag.push(item)) {
             System.out.println(String.format("%s picks up %s", getName(), item));
+        } else {
+            System.out.println(String.format("%s's bag is full", getName()));
         }
+    }
+
+    Collectible pullOut(Collectible item) {
+        Collectible col = this.bag.pop(item);
+        if ( col != null) {
+            System.out.println(String.format("%s pulls out %s", getName(), item));
+        } else {
+            System.out.println(String.format("%s don't have this item : %s", getName(), item));
+        }
+        return col;
     }
 
     /**
