@@ -23,7 +23,7 @@ public abstract class Character {
     private Bag bag;
 
     public Character() {
-        this.bag = new SmallBag;
+        this.bag = new SmallBag();
     }
 
     /**
