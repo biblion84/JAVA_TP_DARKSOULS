@@ -20,5 +20,13 @@ public class TestBag {
 
 
         System.out.println(small);
+
+        Hero h = new Hero();
+        h.pickUp(new RingedKnightArmor());
+        Collectible dragonSlayerLeggings = new DragonSlayerLeggings();
+        h.pickUp(dragonSlayerLeggings);
+        h.printBag();
+        h.pullOut(dragonSlayerLeggings);
+        h.printBag();
     }
 }

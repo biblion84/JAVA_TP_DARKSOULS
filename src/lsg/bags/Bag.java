@@ -63,7 +63,7 @@ public class Bag {
         String retour = String.format("Bag [ %d items | %d/%d kg ]\n", items.size(), getWeight(), getCapacity());
         for (Collectible collectible: this.items){
             if (collectible != null){
-                retour += String.format(" - %s [%d kg]\n", collectible, collectible.getWeight());
+                retour += String.format("- %s [%d kg]\n", collectible, collectible.getWeight());
             }
         }
         if (items.size() == 0){

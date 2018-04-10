@@ -27,6 +27,10 @@ public abstract class Character {
         this.bag = new SmallBag();
     }
 
+    /**
+     * Ajouter un objet dans l'inventaire
+     * @param item
+     */
     public void pickUp(Collectible item) {
         if (this.bag.push(item)) {
             System.out.println(String.format("%s picks up %s", getName(), item));
@@ -35,7 +39,12 @@ public abstract class Character {
         }
     }
 
-    Collectible pullOut(Collectible item) {
+    /**
+     * supprimer un objet dans l'inventaire
+     * @param item
+     * @return
+     */
+    public Collectible pullOut(Collectible item) {
         Collectible col = this.bag.pop(item);
         if ( col != null) {
             System.out.println(String.format("%s pulls out %s", getName(), item));
@@ -43,6 +52,63 @@ public abstract class Character {
             System.out.println(String.format("%s don't have this item : %s", getName(), item));
         }
         return col;
+    }
+
+    /**
+     * Affiche le contenu du sac
+     */
+    public void printBag() {
+        System.out.println(this.bag);
+    }
+
+    public int getBagWeight() {
+        return this.bag.getWeight();
+    }
+
+    /**
+     * Equipe un nouveau sac
+     * @param bag
+     * @return
+     */
+    public Bag setBag(Bag bag){
+        Bag oldBag = this.bag;
+        Bag.transfer(oldBag, bag);
+        System.out.println(String.format("%s changes %s for %s", this.name, oldBag, bag));
+        return oldBag;
+    }
+
+    /**
+     * equipe une arme de l'inventaire
+     * @param weapon
+     */
+    public void equip(Weapon weapon) {
+        if(this.bag.contains(weapon)){
+            this.setWeapon(weapon);
+            System.out.println(String.format("%s equips weapon %s", this.name, weapon));
+        }
+    }
+
+    public void equip(Consumable consumable) {
+        if(this.bag.contains(consumable)){
+            this.setConsumable(consumable);
+            System.out.println(String.format("%s equips consumable %s", this.name, consumable));
+        }
+    }
+
+    /**
+     * Retourne une liste d'objet contenus dans le sacs
+     * @return
+     */
+    public Collectible[] getBagItems() {
+        return this.bag.getItems();
+    }
+
+    /**
+     * Retourne la taille du sac du personnage
+     * @return
+     */
+    public int getBagCapacity() {
+        return this.bag.getCapacity();
     }
 
     /**
