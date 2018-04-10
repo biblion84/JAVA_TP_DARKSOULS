@@ -11,6 +11,7 @@ import lsg.armor.RingedKnightArmor;
 import lsg.consumables.MenuBestOfV1;
 import lsg.consumables.MenuBestOfV2;
 import lsg.consumables.MenuBestOfV3;
+import lsg.consumables.MenuBestOfV4;
 import lsg.consumables.food.Food;
 import lsg.consumables.food.Hamburger;
 import lsg.consumables.repair.RepairKit;
@@ -104,6 +105,12 @@ public class LearningSoulsGame {
         System.out.println(c);
     }
 
+    private void menuBestOfV4(){
+        this.init();
+        MenuBestOfV4 c = new MenuBestOfV4();
+        System.out.println(c);
+    }
+
     private void createExhautedHero(){
         this.hero = new Hero();
         this.hero.getHitWith(99);
@@ -119,7 +126,8 @@ public class LearningSoulsGame {
     public static void main(String[] args) {
 
         LearningSoulsGame game = new LearningSoulsGame();
-        game.menuBestOfV3();
+        game.menuBestOfV4();
+//        game.menuBestOfV3();
 //        game.menuBestOfV2();
 //        game.menuBestOfV1();
 //        game.play_v3();
