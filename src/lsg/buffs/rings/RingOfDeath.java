@@ -10,6 +10,10 @@ public class RingOfDeath extends Ring{
 		super("Ring of Death", 10000) ;
 	}
 
+	/**
+	 * Donne un buff lorsque les points de vie sont inférieur à 50%
+	 * @return
+	 */
 	@Override
 	public float computeBuffValue() {
 		if (hero != null){

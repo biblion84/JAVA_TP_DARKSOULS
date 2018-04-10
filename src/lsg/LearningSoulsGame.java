@@ -1,10 +1,9 @@
 package lsg;
 
-import characters.Character;
-import characters.Hero;
-import characters.Lycanthrope;
-import characters.Monster;
-import lsg.armor.ArmorItem;
+import lsg.characters.Character;
+import lsg.characters.Hero;
+import lsg.characters.Lycanthrope;
+import lsg.characters.Monster;
 import lsg.armor.BlackWitchVeil;
 import lsg.armor.DragonSlayerLeggings;
 import lsg.armor.RingedKnightArmor;
@@ -55,7 +54,7 @@ public class LearningSoulsGame {
 
     }
 
-    public void play_v1(){  
+    public void play_v1(){
         this.init();
         this.fight1v1();
     }

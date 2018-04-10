@@ -8,7 +8,11 @@ public class DragonSlayerRing extends Ring{
 	public DragonSlayerRing() {
 		super("Dragon Slayer Ring", 14) ;
 	}
-	
+
+	/**
+	 * Retourne un buff si le héro possède des pièces d'armure DragonSlayer
+	 * @return
+	 */
 	@Override
 	public float computeBuffValue() {
 		if(hero != null && hasDragonsSlayerItem()){

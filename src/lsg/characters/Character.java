@@ -1,5 +1,6 @@
-package characters;
+package lsg.characters;
 
+import lsg.buffs.BuffItem;
 import lsg.helpers.Dice;
 import lsg.weapons.Weapon;
 
@@ -11,7 +12,7 @@ public abstract class Character {
     protected int maxStamina;
     protected Dice attackDice = new Dice(101);
     protected Weapon weapon;
-
+    protected BuffItem[] buffItems;
     /**
      * Affiche les stats du character
      * @return
@@ -26,7 +27,18 @@ public abstract class Character {
      * @return
      */
     public int attack() {
-        return this.attackWith(this.weapon);
+        int damageBeforBuff = this.attackWith(this.weapon);
+        return (int)(damageBeforBuff + (this.computeBuff() * damageBeforBuff));
+    }
+
+    protected float computeBuff(){
+        float buff = 0f;
+        for (int i =0; i < this.buffItems.length; i++){
+            if (this.buffItems[i] != null){
+                buff += this.buffItems[i].computeBuffValue();
+            }
+        }
+        return buff;
     }
 
     /**

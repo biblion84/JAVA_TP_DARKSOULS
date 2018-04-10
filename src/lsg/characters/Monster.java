@@ -1,8 +1,13 @@
-package characters;
+package lsg.characters;
+
+import lsg.armor.ArmorItem;
+import lsg.buffs.BuffItem;
+import lsg.buffs.rings.Ring;
+import lsg.buffs.talismans.Talisman;
 
 public class Monster extends Character {
     private static int INSTANCE_COUNT = 0;
-
+    final private static int MAX_BUFF_PIECES = 1;
     protected float skinThickness;
 
     /**
@@ -16,6 +21,7 @@ public class Monster extends Character {
         this.stamina = 10;
         this.maxStamina = 10;
         this.skinThickness = 20;
+        this.buffItems = new BuffItem[MAX_BUFF_PIECES];
     }
 
     /**
@@ -37,5 +43,15 @@ public class Monster extends Character {
 
     public float computeProtection(){
         return this.getSkinThickness();
+    }
+
+    public void setTalisman(Talisman talisman, int slot){
+        if (slot >= 1 && slot <= MAX_BUFF_PIECES){
+            this.buffItems[slot -1] = talisman;
+        }
+    }
+
+    public BuffItem[] getBuffItems() {
+        return buffItems;
     }
 }

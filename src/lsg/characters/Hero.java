@@ -1,13 +1,15 @@
-package characters;
+package lsg.characters;
 
 import lsg.armor.ArmorItem;
-
-import java.util.ArrayList;
+import lsg.buffs.BuffItem;
+import lsg.buffs.rings.Ring;
 
 public class Hero  extends Character{
 
     final private static int MAX_ARMOR_PIECES = 3;
-    private ArmorItem[] armor = new ArmorItem[3];
+    final private static int MAX_BUFF_PIECES = 2;
+    private ArmorItem[] armorItems = new ArmorItem[MAX_ARMOR_PIECES];
+    private BuffItem[] buffItems = new BuffItem[MAX_BUFF_PIECES];
 
     /**
      * Constructeur qui instancie un hero avec les charactéristique par défaut
@@ -31,13 +33,13 @@ public class Hero  extends Character{
 
     public void setArmorItem(ArmorItem armorPiece, int slot) {
         if (slot >= 1 && slot <= MAX_ARMOR_PIECES){
-            this.armor[slot-1] = armorPiece;
+            this.armorItems[slot-1] = armorPiece;
         }
     }
 
     public float getTotalArmor(){
         float totalArmor = 0;
-        for (ArmorItem armorItem: this.armor){
+        for (ArmorItem armorItem: this.armorItems){
             if (armorItem != null){
                 totalArmor += armorItem.getArmorValue();
             }
@@ -47,8 +49,8 @@ public class Hero  extends Character{
 
     public String armorToString(){
         String armorSummary = String.format("%-10s", "ARMOR");
-        for (int i = 0; i < this.armor.length; i++){
-            ArmorItem armorItem = this.armor[i];
+        for (int i = 0; i < this.armorItems.length; i++){
+            ArmorItem armorItem = this.armorItems[i];
             if (armorItem != null){
                 armorSummary += String.format("%s:%-30s",i+1 , armorItem);
             } else {
@@ -63,4 +65,17 @@ public class Hero  extends Character{
         return this.getTotalArmor();
     }
 
+    public void setRing(Ring ring, int slot) {
+        if (slot >= 1 && slot <= MAX_BUFF_PIECES){
+            this.buffItems[slot -1] = ring;
+        }
+    }
+
+    public ArmorItem[] getArmorItems(){
+        return this.armorItems;
+    }
+
+    public BuffItem[] getBuffItems() {
+        return buffItems;
+    }
 }
