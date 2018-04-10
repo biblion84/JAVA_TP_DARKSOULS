@@ -63,6 +63,38 @@ public abstract class Character {
      * @return les dégats calculé celon les formules, précision et stamina du character prisent en compte
      */
     public int attackWith(Weapon weapon){
+
+        int damage = computeWeaponDamage(weapon);
+        damage = computeDamageWithBuff(damage);
+
+        weapon.use();
+        this.setStamina(stamina - weapon.getStamCost());
+
+        return damage;
+    }
+
+    /**
+     * @param damage
+     * @return Les damages avec le buff de dégat ajouté par les buffItems du character
+     */
+    private int computeDamageWithBuff(int damage){
+        int buffPercentage = 0;
+        for (BuffItem buffItem: this.buffItems){
+            if (buffItem != null){
+                buffPercentage += buffItem.computeBuffValue();
+            }
+        }
+
+        damage = damage + (int)Math.ceil(damage * buffPercentage / 100f);
+
+        return damage;
+    }
+
+    /**
+     * @param weapon
+     * @return Les dégats donnés par l'arme en fonction de son état et de l'état du character
+     */
+    private int computeWeaponDamage(Weapon weapon){
         if (weapon.isBroken()) return 0;
 
         int damage = weapon.getMinDamage();
@@ -78,9 +110,6 @@ public abstract class Character {
             float modifier = this.stamina/weapon.getStamCost();
             damage = Math.round(damage * modifier);
         }
-
-        weapon.use();
-        this.setStamina(stamina - weapon.getStamCost());
         return damage;
     }
 
@@ -185,4 +214,10 @@ public abstract class Character {
     }
 
     public abstract float computeProtection();
+
+    public abstract void setBuffItems(BuffItem buffItem, int slot);
+
+    public BuffItem[] getBuffItems(){
+        return this.buffItems;
+    };
 }

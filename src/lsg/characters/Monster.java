@@ -2,7 +2,6 @@ package lsg.characters;
 
 import lsg.armor.ArmorItem;
 import lsg.buffs.BuffItem;
-import lsg.buffs.rings.Ring;
 import lsg.buffs.talismans.Talisman;
 
 public class Monster extends Character {
@@ -43,6 +42,12 @@ public class Monster extends Character {
 
     public float computeProtection(){
         return this.getSkinThickness();
+    }
+
+    public void setBuffItems(BuffItem buffItem, int slot){
+        if (buffItem instanceof Talisman){
+            setTalisman((Talisman)buffItem, slot);
+        }
     }
 
     public void setTalisman(Talisman talisman, int slot){

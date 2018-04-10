@@ -1,5 +1,8 @@
 package lsg;
 
+import lsg.buffs.rings.Ring;
+import lsg.buffs.rings.RingOfDeath;
+import lsg.buffs.rings.RingOfSwords;
 import lsg.characters.Character;
 import lsg.characters.Hero;
 import lsg.characters.Lycanthrope;
@@ -70,6 +73,7 @@ public class LearningSoulsGame {
     public void play_v3(){
         this.init();
         this.monster = new Lycanthrope();
+        this.hero.setBuffItems(new RingOfSwords(), 1);
         this.fight1v1();
     }
 

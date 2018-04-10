@@ -9,7 +9,6 @@ public class Hero  extends Character{
     final private static int MAX_ARMOR_PIECES = 3;
     final private static int MAX_BUFF_PIECES = 2;
     private ArmorItem[] armorItems = new ArmorItem[MAX_ARMOR_PIECES];
-    private BuffItem[] buffItems = new BuffItem[MAX_BUFF_PIECES];
 
     /**
      * Constructeur qui instancie un hero avec les charactéristique par défaut
@@ -21,6 +20,7 @@ public class Hero  extends Character{
         this.maxLife = 100;
         this.stamina = 50;
         this.maxStamina = 50;
+        this.buffItems = new BuffItem[MAX_BUFF_PIECES];
     }
 
     /**
@@ -65,8 +65,15 @@ public class Hero  extends Character{
         return this.getTotalArmor();
     }
 
-    public void setRing(Ring ring, int slot) {
+    public void setBuffItems(BuffItem buffItem, int slot){
+        if (buffItem instanceof Ring){
+            setRing((Ring)buffItem, slot);
+        }
+    }
+
+    private void setRing(Ring ring, int slot) {
         if (slot >= 1 && slot <= MAX_BUFF_PIECES){
+            ring.setHero(this);
             this.buffItems[slot -1] = ring;
         }
     }
