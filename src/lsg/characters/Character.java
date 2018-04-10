@@ -257,7 +257,9 @@ public abstract class Character {
     }
 
     private void repairWeaponWith(RepairKit kit){
-        this.weapon.repairWith(kit);
         System.out.println(String.format("%s repairs %s with %s", this.name, this.weapon, kit));
+        this.weapon.repairWith(kit);
+        System.out.println(this);
+        System.out.println(String.format("Après utilisation : %s %s", this.name, kit));
     }
 }

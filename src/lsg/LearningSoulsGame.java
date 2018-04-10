@@ -119,6 +119,7 @@ public class LearningSoulsGame {
         for(Consumable item : bestOf){
             this.hero.use(item);
         }
+        System.out.println(this.hero.getWeapon());
     }
 
     private void createExhautedHero(){

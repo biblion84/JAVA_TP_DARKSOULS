@@ -5,6 +5,7 @@ import lsg.consumables.drinks.Whisky;
 import lsg.consumables.drinks.Wine;
 import lsg.consumables.food.Americain;
 import lsg.consumables.food.Hamburger;
+import lsg.consumables.repair.RepairKit;
 
 import java.util.LinkedHashSet;
 import java.util.Locale;
@@ -17,6 +18,7 @@ public class MenuBestOfV4 extends LinkedHashSet<Consumable> {
         this.add(new Americain());
         this.add(new Coffe());
         this.add(new Whisky());
+        this.add(new RepairKit());
     }
 
 
