@@ -2,6 +2,7 @@ package lsg.bags;
 
 import lsg.armor.DragonSlayerLeggings;
 import lsg.armor.RingedKnightArmor;
+import lsg.characters.Hero;
 
 public class TestBag {
 

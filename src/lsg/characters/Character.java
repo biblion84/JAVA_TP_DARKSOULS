@@ -302,4 +302,40 @@ public abstract class Character {
     public void consume(){
         this.use(getConsumable());
     }
+
+    private <T extends Consumable> Consumable FastUseFirst(Class<T> type){
+        for (Collectible item : this.bag.getItems()){
+            if (type.isInstance(item) ){
+                Consumable c = (Consumable)item;
+                c.use();
+                if (c.getCapacity() == 0){
+                    System.out.println(String.format("%s pull out %s", this.getName(), c));
+                    this.bag.pop(item);
+                }
+                return c;
+            }
+        }
+        return null;
+    }
+
+    public Drink fastDrink(){
+        Drink drink = (Drink)this.FastUseFirst(Drink.class);
+        System.out.println(String.format("%s drink FAST", this.getName()));
+        System.out.println(String.format("%s drink %s", this.getName(), drink));
+        return drink;
+    }
+
+    public Food fastEat(){
+        Food food = (Food)this.FastUseFirst(Food.class);
+        System.out.println(String.format("%s eat FAST", this.getName()));
+        System.out.println(String.format("%s eat %s", this.getName(), food));
+        return food;
+    }
+
+    public RepairKit fastRepair(){
+        RepairKit repairKit = (RepairKit)this.FastUseFirst(RepairKit.class);
+        System.out.println(String.format("%s repair FAST", this.getName()));
+        System.out.println(String.format("%s repair %s", this.getName(), repairKit));
+        return repairKit;
+    }
 }

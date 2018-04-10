@@ -85,4 +85,5 @@ public class Hero  extends Character{
     public BuffItem[] getBuffItems() {
         return buffItems;
     }
+
 }
