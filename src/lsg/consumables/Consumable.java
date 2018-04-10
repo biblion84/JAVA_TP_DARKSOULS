@@ -1,8 +1,10 @@
 package lsg.consumables;
 
+import lsg.bags.Collectible;
+
 import java.util.Locale;
 
-public abstract class Consumable {
+public abstract class Consumable implements Collectible {
 
 	private String name;
     private int capacity;
@@ -48,5 +50,10 @@ public abstract class Consumable {
 	public String toString() {
 		return String.format(Locale.US, "%s [%d %s point%s]", getName(), getCapacity(), getStat(), getPlural()) ;
 	}
+
+    @Override
+    public int getWeight() {
+        return 1;
+    }
 	
 }
