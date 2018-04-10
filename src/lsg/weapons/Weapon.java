@@ -1,6 +1,10 @@
 package lsg.weapons;
 
+import lsg.consumables.repair.RepairKit;
+
 public class Weapon {
+    public static final String  DURABILITY_STAT_STRING = "durability";
+
     private String name;
     private int minDamage;
     private int maxDamage;
@@ -58,6 +62,9 @@ public class Weapon {
         } else {
             this.durability = durability;
         }
+    }
 
+    public void repairWith(RepairKit kit){
+        this.setDurability(this.getDurability() + kit.use());
     }
 }

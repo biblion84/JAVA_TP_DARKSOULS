@@ -12,6 +12,7 @@ import lsg.consumables.MenuBestOfV1;
 import lsg.consumables.MenuBestOfV2;
 import lsg.consumables.food.Food;
 import lsg.consumables.food.Hamburger;
+import lsg.consumables.repair.RepairKit;
 import lsg.weapons.Claw;
 import lsg.weapons.Sword;
 import lsg.weapons.Weapon;
@@ -23,10 +24,12 @@ public class LearningSoulsGame {
     private Hero hero;
     private Monster monster;
     private Scanner scanner = new Scanner(System.in);
+    private static RepairKit kit = new RepairKit();
 
     private void refresh(){
         System.out.println(hero);
         System.out.println(monster);
+        this.hero.use(LearningSoulsGame.kit);
     }
 
 
@@ -103,15 +106,15 @@ public class LearningSoulsGame {
     }
 
     private void aTable(){
-        
+
     }
 
     public static void main(String[] args) {
 
         LearningSoulsGame game = new LearningSoulsGame();
-        game.menuBestOfV2();
+//        game.menuBestOfV2();
 //        game.menuBestOfV1();
-//        game.play_v3();
+        game.play_v3();
 //        Hero hero = new Hero("rick");
 //        ArmorItem veil = new BlackWitchVeil();
 //        hero.setArmorItem(veil, 2);

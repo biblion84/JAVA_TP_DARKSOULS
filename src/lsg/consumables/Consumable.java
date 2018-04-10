@@ -34,14 +34,14 @@ public abstract class Consumable {
         }
     }
 
-    private void setCapacity(int capacity) {
+    protected void setCapacity(int capacity) {
         this.capacity = capacity;
     }
 
     public int use() {
-	    capacity = getCapacity();
+	    int cap = getCapacity();
 	    setCapacity(0);
-	    return capacity;
+	    return cap;
     }
 
     @Override

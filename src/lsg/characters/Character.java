@@ -4,6 +4,7 @@ import lsg.buffs.BuffItem;
 import lsg.consumables.Consumable;
 import lsg.consumables.drinks.Drink;
 import lsg.consumables.food.Food;
+import lsg.consumables.repair.RepairKit;
 import lsg.helpers.Dice;
 import lsg.weapons.Weapon;
 
@@ -246,6 +247,13 @@ public abstract class Character {
             this.drink((Drink)consumable);
         } else if (consumable instanceof Food){
             this.eat((Food)consumable);
+        } else if (consumable instanceof RepairKit){
+            this.repairWeaponWith((RepairKit) consumable);
         }
+    }
+
+    private void repairWeaponWith(RepairKit kit){
+        this.weapon.repairWith(kit);
+        System.out.println(String.format("%s repairs %s with %s", this.name, this.weapon, kit));
     }
 }
