@@ -20,10 +20,12 @@ public class Bag {
         return weight;
     }
 
-    public void push(Collectible collectible){
+    public boolean push(Collectible collectible){
         if (collectible.getWeight() < capacity - weight){
             this.items.add(collectible);
+            return true;
         }
+        return false;
     }
 
     public Collectible pop(Collectible collectible){

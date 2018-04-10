@@ -1,6 +1,7 @@
 package lsg.characters;
 
 import lsg.bags.Bag;
+import lsg.bags.Collectible;
 import lsg.bags.SmallBag;
 import lsg.buffs.BuffItem;
 import lsg.consumables.Consumable;
@@ -24,6 +25,12 @@ public abstract class Character {
 
     public Character() {
         this.bag = new SmallBag();
+    }
+
+    public void pickUp(Collectible item) {
+        if (this.bag.push(item)) {
+            System.out.println(String.format("%s picks up %s", getName(), item));
+        }
     }
 
     /**
