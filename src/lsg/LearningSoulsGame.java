@@ -11,6 +11,8 @@ import lsg.armor.BlackWitchVeil;
 import lsg.armor.DragonSlayerLeggings;
 import lsg.armor.RingedKnightArmor;
 import lsg.consumables.Consumable;
+import lsg.consumables.MenuBestOfV1;
+import lsg.consumables.Consumable;
 import lsg.consumables.food.Food;
 import lsg.consumables.food.Hamburger;
 import lsg.weapons.Claw;
@@ -61,12 +63,12 @@ public class LearningSoulsGame {
 
     }
 
-    public void play_v1(){
+    private void play_v1(){
         this.init();
         this.fight1v1();
     }
 
-    public void play_v2(){
+    private void play_v2(){
         this.init();
         this.hero.setArmorItem(new BlackWitchVeil(), 1);
         this.hero.setArmorItem(new DragonSlayerLeggings(), 2);
@@ -74,7 +76,7 @@ public class LearningSoulsGame {
         this.fight1v1();
     }
 
-    public void play_v3(){
+    private void play_v3(){
         this.init();
         this.monster = new Lycanthrope();
         this.hero.setBuffItems(new RingOfSwords(), 1);
@@ -83,7 +85,13 @@ public class LearningSoulsGame {
         this.fight1v1();
     }
 
-    private Hero createExhautedHero(){
+    private void menuBestOfV1(){
+        this.init();
+        MenuBestOfV1 c = new MenuBestOfV1();
+        System.out.println(c);
+    }
+
+    private void createExhautedHero(){
         this.hero = new Hero();
         this.hero.getHitWith(99);
         this.hero.setWeapon(new Weapon("Grosse Arme", 0,0,1000,100));
@@ -98,7 +106,8 @@ public class LearningSoulsGame {
     public static void main(String[] args) {
 
         LearningSoulsGame game = new LearningSoulsGame();
-        game.play_v3();
+        game.menuBestOfV1();
+//        game.play_v3();
 //        Hero hero = new Hero("rick");
 //        ArmorItem veil = new BlackWitchVeil();
 //        hero.setArmorItem(veil, 2);
