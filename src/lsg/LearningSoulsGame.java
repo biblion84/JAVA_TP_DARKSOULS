@@ -20,36 +20,25 @@ import java.util.Scanner;
 
 public class LearningSoulsGame {
 
-    public static final String BULLET_POINT = "\u2219";
-
     private Hero hero;
     private Monster monster;
     private Scanner scanner = new Scanner(System.in);
+    private static RepairKit kit = new RepairKit();
 
     private void refresh(){
         System.out.println(hero);
-        System.out.println(BULLET_POINT + hero.getWeapon());
-        System.out.println(BULLET_POINT + hero.getConsumable());
-        System.out.println(BULLET_POINT + monster);
+        System.out.println(monster);
+        this.hero.use(LearningSoulsGame.kit);
     }
 
 
     private void fight1v1(){
         Character winner = null;
-        int action;
         do {
             this.refresh();
-
-            do {
-                System.out.println(String.format("  Entrez 1 pour attaquer; 0 pour consommer votre %s", this.hero.getConsumable().getName() ));
-                action = this.scanner.nextInt();
-            } while (action > 2 || action < 0);
-
-            if (action == 0){
-                this.monster.getHitWith(this.hero);
-            } else if (action == 1) {
-                this.hero.consume();
-            }
+            System.out.println("Appuyez sur entrée pour lancer le tour suivant");
+            this.scanner.nextLine();
+            this.monster.getHitWith(hero);
 
             if (!this.monster.isAlive()){
                 winner = this.hero;
@@ -70,8 +59,6 @@ public class LearningSoulsGame {
 
         this.hero.setWeapon(new Sword());
         this.monster.setWeapon(new Claw());
-
-        this.hero.setConsumable(new Hamburger());
 
     }
 
@@ -142,63 +129,12 @@ public class LearningSoulsGame {
         System.out.println(hero);
     }
 
-    public void title(){
-        String title = "\n" +
-                "\n" +
-                " __    ____    __    ____  _  _  ____  _  _  ___    ___  _____  __  __  __       ___    __    __  __  ____ \n" +
-                "(  )  ( ___)  /__\\  (  _ \\( \\( )(_  _)( \\( )/ __)  / __)(  _  )(  )(  )(  )     / __)  /__\\  (  \\/  )( ___)\n" +
-                " )(__  )__)  /(__)\\  )   / )  (  _)(_  )  (( (_-.  \\__ \\ )(_)(  )(__)(  )(__   ( (_-. /(__)\\  )    (  )__) \n" +
-                "(____)(____)(__)(__)(_)\\_)(_)\\_)(____)(_)\\_)\\___/  (___/(_____)(______)(____)   \\___/(__)(__)(_/\\/\\_)(____)\n" +
-                "\n";
-        String centaur = "         ,     .\n" +
-                "        /(     )\\               A\n" +
-                "   .--.( `.___.' ).--.         /_\\\n" +
-                "   `._ `%_&%#%$_ ' _.'     /| <___> |\\\n" +
-                "      `|(@\\*%%/@)|'       / (  |L|  ) \\\n" +
-                "       |  |%%#|  |       J d8bo|=|od8b L\n" +
-                "        \\ \\$#%/ /        | 8888|=|8888 |\n" +
-                "        |\\|%%#|/|        J Y8P\"|=|\"Y8P F\n" +
-                "        | (.\".)%|         \\ (  |L|  ) /\n" +
-                "    ___.'  `-'  `.___      \\|  |L|  |/\n" +
-                "  .'#*#`-       -'$#*`.       / )|\n" +
-                " /#%^#%*_ *%^%_  #  %$%\\    .J (__)\n" +
-                " #&  . %%%#% ###%*.   *%\\.-'&# (__)\n" +
-                " %*  J %.%#_|_#$.\\J* \\ %'#%*^  (__)\n" +
-                " *#% J %$%%#|#$#$ J\\%   *   .--|(_)\n" +
-                " |%  J\\ `%%#|#%%' / `.   _.'   |L|\n" +
-                " |#$%||` %%%$### '|   `-'      |L|\n" +
-                " (#%%||` #$#$%%% '|            |L|\n" +
-                " | ##||  $%%.%$%  |            |L|\n" +
-                " |$%^||   $%#$%   |  VK/cf     |L|\n" +
-                " |&^ ||  #%#$%#%  |            |L|\n" +
-                " |#$*|| #$%$$#%%$ |\\           |L|\n" +
-                " ||||||  %%(@)$#  |\\\\          |L|\n" +
-                " `|||||  #$$|%#%  | L|         |L|\n" +
-                "      |  #$%|$%%  | ||l        |L|\n" +
-                "      |  ##$H$%%  | |\\\\        |L|\n" +
-                "      |  #%%H%##  | |\\\\|       |L|\n" +
-                "      |  ##% $%#  | Y|||       |L|\n" +
-                "      J $$#* *%#% L  |E/\n" +
-                "      (__ $F J$ __)  F/\n" +
-                "      J#%$ | |%%#%L\n" +
-                "      |$$%#& & %%#|\n" +
-                "      J##$ J % %%$F\n" +
-                "       %$# * * %#&\n" +
-                "       %#$ | |%#$%\n" +
-                "       *#$%| | #$*\n" +
-                "      /$#' ) ( `%%\\\n" +
-                "     /#$# /   \\ %$%\\\n" +
-                "    ooooO'     `Ooooo";
-        System.out.println(title);
-        System.out.println(centaur);
-    }
-
     public static void main(String[] args) {
 
         LearningSoulsGame game = new LearningSoulsGame();
-        game.title();
-        game.play_v1();
-//        game.play_v4();
+        game.play_v4();
+//        game.aTable();
+//        game.menuBestOfV4();
 //        game.menuBestOfV3();
 //        game.menuBestOfV2();
 //        game.menuBestOfV1();

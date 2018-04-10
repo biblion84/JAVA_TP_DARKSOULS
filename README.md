@@ -25,10 +25,3 @@ référence et non pas valeur, c'est donc l'épée de départ qui est utilisée 
 
 4.2 : compute protection est une méthode abstraite, ce qui veut dire qu'elle doit être implémenté par toute les
 classes filles de Character, hors elle n'est pas encore implémenté dans Hero ou Monster.
-
-#TP4
-
-3.3 Lors de l'itération d'un HashSet l'ordre n'est pas garanti et peut changer au cours du temps.
-
-3.4 LinkedHashSet diffère d'un HashSet car elle conserve l'ordre du set. Lors d'itérations l'ordre sera
-toujours celui que l'on a défini.
