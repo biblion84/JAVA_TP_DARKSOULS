@@ -12,6 +12,7 @@ import lsg.consumables.*;
 import lsg.consumables.food.Food;
 import lsg.consumables.food.Hamburger;
 import lsg.consumables.repair.RepairKit;
+import lsg.exceptions.WeaponBrokenException;
 import lsg.exceptions.WeaponNullException;
 import lsg.weapons.Claw;
 import lsg.weapons.Sword;
@@ -47,6 +48,8 @@ public class LearningSoulsGame {
                 } catch (WeaponNullException e){
                     System.out.println(e.getMessage());
                     this.monster.getHitWith(0);
+                } catch (WeaponBrokenException e) {
+                    e.printStackTrace();
                 }
                 break;
             case 2:
@@ -66,8 +69,8 @@ public class LearningSoulsGame {
         this.hero.setWeapon(new Weapon("Grosse Arme", 0,0,1000,100));
         try {
             this.hero.attack();
-        } catch (WeaponNullException weaponNull){
-            weaponNull.printStackTrace();
+        } catch (WeaponNullException | WeaponBrokenException e){
+            e.printStackTrace();
         }
         System.out.println(hero);
     }
@@ -92,8 +95,8 @@ public class LearningSoulsGame {
             }
             try {
                 this.hero.getHitWith(monster);
-            } catch (WeaponNullException e){
-                //
+            } catch (WeaponNullException | WeaponBrokenException e){
+                e.printStackTrace();
             }
             if (!this.hero.isAlive()){
                 winner = this.monster;
@@ -110,7 +113,7 @@ public class LearningSoulsGame {
         this.hero.setWeapon(new Sword());
         this.monster.setWeapon(new Claw());
 
-        this.hero.setConsumable(new RepairKit()0);
+        this.hero.setConsumable(new RepairKit());
 
 //        this.fight1v1();
         this.testExceptions();

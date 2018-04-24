@@ -8,6 +8,7 @@ import lsg.consumables.Consumable;
 import lsg.consumables.drinks.Drink;
 import lsg.consumables.food.Food;
 import lsg.consumables.repair.RepairKit;
+import lsg.exceptions.WeaponBrokenException;
 import lsg.exceptions.WeaponNullException;
 import lsg.helpers.Dice;
 import lsg.weapons.Weapon;
@@ -125,7 +126,7 @@ public abstract class Character {
      * Renvois les dégats effectué lors de l'attaque
      * @return
      */
-    public int attack() throws WeaponNullException {
+    public int attack() throws WeaponNullException, WeaponBrokenException {
         int damageBeforBuff = this.attackWith(this.weapon);
         return (int)(damageBeforBuff + (this.computeBuff() * damageBeforBuff));
     }
@@ -161,10 +162,14 @@ public abstract class Character {
      * @param weapon
      * @return les dégats calculé celon les formules, précision et stamina du character prisent en compte
      */
-    public int attackWith(Weapon weapon) throws WeaponNullException {
+    public int attackWith(Weapon weapon) throws WeaponNullException, WeaponBrokenException {
 
         if (weapon == null){
             throw new WeaponNullException();
+        }
+
+        if (weapon.isBroken()){
+            throw new WeaponBrokenException(weapon);
         }
 
         int damage = computeWeaponDamage(weapon);
@@ -252,7 +257,7 @@ public abstract class Character {
      * @param opponent
      * @return
      */
-    public int getHitWith(Character opponent) throws WeaponNullException {
+    public int getHitWith(Character opponent) throws WeaponNullException, WeaponBrokenException {
         int damages = opponent.attack();
         int realDamages = this.getHitWith(damages);
         System.out.println("!!! "+opponent.name+" attacks "+this.name+" with " +
