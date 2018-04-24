@@ -12,6 +12,7 @@ import lsg.consumables.*;
 import lsg.consumables.food.Food;
 import lsg.consumables.food.Hamburger;
 import lsg.consumables.repair.RepairKit;
+import lsg.exceptions.ConsumeNullException;
 import lsg.exceptions.StaminaEmptyException;
 import lsg.exceptions.WeaponBrokenException;
 import lsg.exceptions.WeaponNullException;
@@ -41,7 +42,11 @@ public class LearningSoulsGame {
     private void executeAction(int actionType){
         switch (actionType){
             case 0:
-                this.hero.consume();
+                try{
+                    this.hero.consume();
+                } catch (ConsumeNullException e){
+                    System.out.println("Warning: no consumable have been equipped");
+                }
                 break;
             case 1:
                 try{
