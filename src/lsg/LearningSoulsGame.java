@@ -33,6 +33,26 @@ public class LearningSoulsGame {
         System.out.println(BULLET_POINT + monster);
     }
 
+    private void executeAction(int actionType){
+        switch (actionType){
+            case 0:
+                this.monster.getHitWith(this.hero);
+                break;
+            case 1:
+                this.hero.consume();
+                break;
+            case 2:
+                this.hero.fastDrink();
+                break;
+            case 3:
+                this.hero.fastEat();
+                break;
+            case 4:
+                this.hero.fastRepair();
+                break;
+        }
+    }
+
 
     private void fight1v1(){
         Character winner = null;
@@ -41,15 +61,11 @@ public class LearningSoulsGame {
             this.refresh();
 
             do {
-                System.out.println(String.format("  Entrez 1 pour attaquer; 0 pour consommer votre %s", this.hero.getConsumable().getName() ));
+                System.out.println(String.format("  Entrez 1 pour attaquer; 0 pour consommer votre %s, 2 pour boire, 3 pour manger et 4 pour réparer rapidement", this.hero.getConsumable().getName() ));
                 action = this.scanner.nextInt();
-            } while (action > 2 || action < 0);
+            } while (action > 4 || action < 0);
 
-            if (action == 0){
-                this.monster.getHitWith(this.hero);
-            } else if (action == 1) {
-                this.hero.consume();
-            }
+            this.executeAction(action);
 
             if (!this.monster.isAlive()){
                 winner = this.hero;
