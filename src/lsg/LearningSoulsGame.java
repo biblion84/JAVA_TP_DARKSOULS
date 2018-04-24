@@ -41,7 +41,7 @@ public class LearningSoulsGame {
                 this.hero.consume();
                 break;
             case 1:
-                this.monster.get1HitWith(this.hero);
+                this.monster.getHitWith(this.hero);
                 break;
             case 2:
                 this.hero.fastDrink();
