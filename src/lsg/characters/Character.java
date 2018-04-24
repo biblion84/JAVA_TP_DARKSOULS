@@ -8,6 +8,7 @@ import lsg.consumables.Consumable;
 import lsg.consumables.drinks.Drink;
 import lsg.consumables.food.Food;
 import lsg.consumables.repair.RepairKit;
+import lsg.exceptions.StaminaEmptyException;
 import lsg.exceptions.WeaponBrokenException;
 import lsg.exceptions.WeaponNullException;
 import lsg.helpers.Dice;
@@ -126,7 +127,7 @@ public abstract class Character {
      * Renvois les dégats effectué lors de l'attaque
      * @return
      */
-    public int attack() throws WeaponNullException, WeaponBrokenException {
+    public int attack() throws WeaponNullException, WeaponBrokenException, StaminaEmptyException {
         int damageBeforBuff = this.attackWith(this.weapon);
         return (int)(damageBeforBuff + (this.computeBuff() * damageBeforBuff));
     }
@@ -162,7 +163,7 @@ public abstract class Character {
      * @param weapon
      * @return les dégats calculé celon les formules, précision et stamina du character prisent en compte
      */
-    public int attackWith(Weapon weapon) throws WeaponNullException, WeaponBrokenException {
+    public int attackWith(Weapon weapon) throws WeaponNullException, WeaponBrokenException, StaminaEmptyException {
 
         if (weapon == null){
             throw new WeaponNullException();
@@ -170,6 +171,10 @@ public abstract class Character {
 
         if (weapon.isBroken()){
             throw new WeaponBrokenException(weapon);
+        }
+
+        if (getMaxStamina() == 0){
+            throw new StaminaEmptyException();
         }
 
         int damage = computeWeaponDamage(weapon);
@@ -257,7 +262,7 @@ public abstract class Character {
      * @param opponent
      * @return
      */
-    public int getHitWith(Character opponent) throws WeaponNullException, WeaponBrokenException {
+    public int getHitWith(Character opponent) throws WeaponNullException, WeaponBrokenException, StaminaEmptyException {
         int damages = opponent.attack();
         int realDamages = this.getHitWith(damages);
         System.out.println("!!! "+opponent.name+" attacks "+this.name+" with " +

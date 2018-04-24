@@ -12,6 +12,7 @@ import lsg.consumables.*;
 import lsg.consumables.food.Food;
 import lsg.consumables.food.Hamburger;
 import lsg.consumables.repair.RepairKit;
+import lsg.exceptions.StaminaEmptyException;
 import lsg.exceptions.WeaponBrokenException;
 import lsg.exceptions.WeaponNullException;
 import lsg.weapons.Claw;
@@ -44,11 +45,16 @@ public class LearningSoulsGame {
                 break;
             case 1:
                 try{
-                    this.monster.getHitWith(this.hero);
+                    int damages = hero.attack();
+                    int realDamages = this.monster.getHitWith(damages);
+                    System.out.println("!!! "+hero.getName()+" attacks "+monster.getName()+" with " +
+                            hero.getWeapon().getName()+ " ("+ damages +") !!! -> Effective DMG: "+realDamages+ " PV");
                 } catch (WeaponNullException e){
                     System.out.println(e.getMessage());
                     this.monster.getHitWith(0);
                 } catch (WeaponBrokenException e) {
+                    System.out.println("WARNING: " + e.getMessage());
+                } catch (StaminaEmptyException e) {
                     e.printStackTrace();
                 }
                 break;
@@ -66,12 +72,12 @@ public class LearningSoulsGame {
 
     private void createExhautedHero(){
         this.hero.getHitWith(99);
-        this.hero.setWeapon(new Weapon("Grosse Arme", 0,0,1000,100));
-        try {
-            this.hero.attack();
-        } catch (WeaponNullException | WeaponBrokenException e){
-            e.printStackTrace();
-        }
+//        this.hero.setWeapon(new Weapon("Grosse Arme", 0,0,1000,100));
+//        try {
+//            this.hero.attack();
+//        } catch (WeaponNullException | WeaponBrokenException e){
+//            e.printStackTrace();
+//        }
         System.out.println(hero);
     }
 
@@ -94,8 +100,8 @@ public class LearningSoulsGame {
                 continue;
             }
             try {
-                this.hero.getHitWith(monster);
-            } catch (WeaponNullException | WeaponBrokenException e){
+                this.hero.getHitWith(monster.attack());
+            } catch (WeaponNullException | WeaponBrokenException | StaminaEmptyException e){
                 e.printStackTrace();
             }
             if (!this.hero.isAlive()){
