@@ -38,10 +38,10 @@ public class LearningSoulsGame {
     private void executeAction(int actionType){
         switch (actionType){
             case 0:
-                this.monster.getHitWith(this.hero);
+                this.hero.consume();
                 break;
             case 1:
-                this.hero.consume();
+                this.monster.get1HitWith(this.hero);
                 break;
             case 2:
                 this.hero.fastDrink();
@@ -91,7 +91,8 @@ public class LearningSoulsGame {
 
         this.hero.setConsumable(new Hamburger());
 
-        this.fight1v1();
+//        this.fight1v1();
+        this.testExceptions();
     }
 
     public void title(){
@@ -143,6 +144,11 @@ public class LearningSoulsGame {
                 "    ooooO'     `Ooooo";
         System.out.println(title);
         System.out.println(centaur);
+    }
+
+    private void testExceptions(){
+        this.hero.setWeapon(null);
+        this.fight1v1();
     }
 
     public static void main(String[] args) {

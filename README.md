@@ -32,3 +32,12 @@ classes filles de Character, hors elle n'est pas encore implémenté dans Hero o
 
 3.4 LinkedHashSet diffère d'un HashSet car elle conserve l'ordre du set. Lors d'itérations l'ordre sera
 toujours celui que l'on a défini.
+
+#TP6
+
+##2.2
+
+Le héro essaye d'attaquer avec une arme qui pointe sur null
+Nous essayons d'appeller la méthode isBroken dans le calcul des dommages.
+Nous ne pouvons pas appeller de méthode sur null Java nous lance donc un NullPointerException
+la ligne qui a généré l'erreur est dans la méthode computeWeaponDamage dans la classe Character if (weapon.isBroken()) return 0;
