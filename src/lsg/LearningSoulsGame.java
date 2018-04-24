@@ -28,9 +28,11 @@ public class LearningSoulsGame {
 
     private void refresh(){
         System.out.println(hero);
-        System.out.println(BULLET_POINT + hero.getWeapon());
-        System.out.println(BULLET_POINT + hero.getConsumable());
+        System.out.println(BULLET_POINT + "WEAPON : " + hero.getWeapon());
+        hero.printConsumable();
+        hero.printRings();
         System.out.println(BULLET_POINT + monster);
+        System.out.println(BULLET_POINT + "WEAPON : " + monster.getWeapon());
     }
 
     private void executeAction(int actionType){
@@ -89,73 +91,7 @@ public class LearningSoulsGame {
 
         this.hero.setConsumable(new Hamburger());
 
-    }
-
-    private void play_v1(){
-        this.init();
         this.fight1v1();
-    }
-
-    private void play_v2(){
-        this.init();
-        this.hero.setArmorItem(new BlackWitchVeil(), 1);
-        this.hero.setArmorItem(new DragonSlayerLeggings(), 2);
-        this.hero.setArmorItem(new RingedKnightArmor(), 3);
-        this.fight1v1();
-    }
-
-    private void play_v3(){
-        this.init();
-        this.monster = new Lycanthrope();
-        this.hero.setBuffItems(new RingOfSwords(), 1);
-        Food f = new Hamburger();
-        this.hero.use(f);
-        this.fight1v1();
-    }
-
-    private void play_v4(){
-        this.init();
-        createExhautedHero();
-        aTable();
-    }
-
-    private void menuBestOfV1(){
-        this.init();
-        MenuBestOfV1 c = new MenuBestOfV1();
-        System.out.println(c);
-    }
-
-    private void menuBestOfV2(){
-        this.init();
-        MenuBestOfV2 c = new MenuBestOfV2();
-        System.out.println(c);
-    }
-
-    private void menuBestOfV3(){
-        this.init();
-        MenuBestOfV3 c = new MenuBestOfV3();
-        System.out.println(c);
-    }
-
-    private void menuBestOfV4(){
-        this.init();
-        MenuBestOfV4 c = new MenuBestOfV4();
-        System.out.println(c);
-    }
-
-    private void aTable(){
-        MenuBestOfV4 bestOf = new MenuBestOfV4();
-        for(Consumable item : bestOf){
-            this.hero.use(item);
-        }
-        System.out.println(this.hero.getWeapon());
-    }
-
-    private void createExhautedHero(){
-        this.hero.getHitWith(99);
-        this.hero.setWeapon(new Weapon("Grosse Arme", 0,0,1000,100));
-        this.hero.attack();
-        System.out.println(hero);
     }
 
     public void title(){
@@ -210,34 +146,7 @@ public class LearningSoulsGame {
     }
 
     public static void main(String[] args) {
-
         LearningSoulsGame game = new LearningSoulsGame();
-        game.title();
-        game.play_v1();
-//        game.play_v4();
-//        game.menuBestOfV3();
-//        game.menuBestOfV2();
-//        game.menuBestOfV1();
-//        game.play_v3();
-//        Hero hero = new Hero("rick");
-//        ArmorItem veil = new BlackWitchVeil();
-//        hero.setArmorItem(veil, 2);
-//        System.out.println(hero.armorToString());
-
-//        Monster monster = new Monster("zombie");
-//        hero.setWeapon(new ShotGun());
-//        monster.setWeapon(new ShotGun());
-//        System.out.println(hero);
-//        System.out.println(monster);
-//        monster.getHitWith(hero);
-//        System.out.println(monster);
-//
-////        hero.printStats();
-////        //hero.printStat
-//        for (int i = 0; i < 100; i++){
-//        monster.getHitWith(hero);
-//
-////            new Monster().printStats();
-//        }
+        game.init();
     }
 }

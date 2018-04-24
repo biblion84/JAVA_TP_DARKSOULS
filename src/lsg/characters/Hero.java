@@ -78,6 +78,14 @@ public class Hero  extends Character{
         }
     }
 
+    public void printRings() {
+        System.out.print("RINGS ");
+        for (int i = 0; i < this.buffItems.length; i++) {
+            System.out.print(String.format("%d: %-15s", i + 1, this.buffItems[i]));
+        }
+        System.out.println();
+    }
+
     public ArmorItem[] getArmorItems(){
         return this.armorItems;
     }

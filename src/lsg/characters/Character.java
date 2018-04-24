@@ -357,6 +357,10 @@ public abstract class Character {
         System.out.println(String.format("Après utilisation : %s %s", this.name, kit));
     }
 
+    public void printConsumable(){
+        System.out.println("CONSUMABLE : " + getConsumable());
+    }
+
     public Consumable getConsumable() {
         return Consumable;
     }
