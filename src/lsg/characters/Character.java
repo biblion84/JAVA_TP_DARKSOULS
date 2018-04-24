@@ -8,6 +8,7 @@ import lsg.consumables.Consumable;
 import lsg.consumables.drinks.Drink;
 import lsg.consumables.food.Food;
 import lsg.consumables.repair.RepairKit;
+import lsg.exceptions.WeaponNullException;
 import lsg.helpers.Dice;
 import lsg.weapons.Weapon;
 
@@ -124,7 +125,7 @@ public abstract class Character {
      * Renvois les dégats effectué lors de l'attaque
      * @return
      */
-    public int attack() {
+    public int attack() throws WeaponNullException {
         int damageBeforBuff = this.attackWith(this.weapon);
         return (int)(damageBeforBuff + (this.computeBuff() * damageBeforBuff));
     }
@@ -160,7 +161,11 @@ public abstract class Character {
      * @param weapon
      * @return les dégats calculé celon les formules, précision et stamina du character prisent en compte
      */
-    public int attackWith(Weapon weapon){
+    public int attackWith(Weapon weapon) throws WeaponNullException {
+
+        if (weapon == null){
+            throw new WeaponNullException();
+        }
 
         int damage = computeWeaponDamage(weapon);
         damage = computeDamageWithBuff(damage);
@@ -247,7 +252,7 @@ public abstract class Character {
      * @param opponent
      * @return
      */
-    public int getHitWith(Character opponent) {
+    public int getHitWith(Character opponent) throws WeaponNullException {
         int damages = opponent.attack();
         int realDamages = this.getHitWith(damages);
         System.out.println("!!! "+opponent.name+" attacks "+this.name+" with " +
@@ -346,11 +351,18 @@ public abstract class Character {
         } else if (consumable instanceof Food){
             this.eat((Food)consumable);
         } else if (consumable instanceof RepairKit){
-            this.repairWeaponWith((RepairKit) consumable);
+            try {
+                this.repairWeaponWith((RepairKit) consumable);
+            } catch (WeaponNullException e){
+                e.printStackTrace();
+            }
         }
     }
 
-    private void repairWeaponWith(RepairKit kit){
+    private void repairWeaponWith(RepairKit kit) throws WeaponNullException {
+        if (this.weapon == null){
+            throw new WeaponNullException();
+        }
         System.out.println(String.format("%s repairs %s with %s", this.name, this.weapon, kit));
         this.weapon.repairWith(kit);
         System.out.println(this);

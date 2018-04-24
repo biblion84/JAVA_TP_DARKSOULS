@@ -12,6 +12,7 @@ import lsg.consumables.*;
 import lsg.consumables.food.Food;
 import lsg.consumables.food.Hamburger;
 import lsg.consumables.repair.RepairKit;
+import lsg.exceptions.WeaponNullException;
 import lsg.weapons.Claw;
 import lsg.weapons.Sword;
 import lsg.weapons.Weapon;
@@ -41,7 +42,12 @@ public class LearningSoulsGame {
                 this.hero.consume();
                 break;
             case 1:
-                this.monster.getHitWith(this.hero);
+                try{
+                    this.monster.getHitWith(this.hero);
+                } catch (WeaponNullException e){
+                    System.out.println(e.getMessage());
+                    this.monster.getHitWith(0);
+                }
                 break;
             case 2:
                 this.hero.fastDrink();
@@ -53,6 +59,17 @@ public class LearningSoulsGame {
                 this.hero.fastRepair();
                 break;
         }
+    }
+
+    private void createExhautedHero(){
+        this.hero.getHitWith(99);
+        this.hero.setWeapon(new Weapon("Grosse Arme", 0,0,1000,100));
+        try {
+            this.hero.attack();
+        } catch (WeaponNullException weaponNull){
+            weaponNull.printStackTrace();
+        }
+        System.out.println(hero);
     }
 
 
@@ -73,7 +90,11 @@ public class LearningSoulsGame {
                 winner = this.hero;
                 continue;
             }
-            this.hero.getHitWith(monster);
+            try {
+                this.hero.getHitWith(monster);
+            } catch (WeaponNullException e){
+                //
+            }
             if (!this.hero.isAlive()){
                 winner = this.monster;
             }
@@ -89,7 +110,7 @@ public class LearningSoulsGame {
         this.hero.setWeapon(new Sword());
         this.monster.setWeapon(new Claw());
 
-        this.hero.setConsumable(new Hamburger());
+        this.hero.setConsumable(new RepairKit()0);
 
 //        this.fight1v1();
         this.testExceptions();
