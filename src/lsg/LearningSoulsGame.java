@@ -12,10 +12,7 @@ import lsg.consumables.*;
 import lsg.consumables.food.Food;
 import lsg.consumables.food.Hamburger;
 import lsg.consumables.repair.RepairKit;
-import lsg.exceptions.ConsumeNullException;
-import lsg.exceptions.StaminaEmptyException;
-import lsg.exceptions.WeaponBrokenException;
-import lsg.exceptions.WeaponNullException;
+import lsg.exceptions.*;
 import lsg.weapons.Claw;
 import lsg.weapons.Sword;
 import lsg.weapons.Weapon;
@@ -39,39 +36,30 @@ public class LearningSoulsGame {
         System.out.println(BULLET_POINT + "WEAPON : " + monster.getWeapon());
     }
 
-    private void executeAction(int actionType){
-        switch (actionType){
-            case 0:
-                try{
+    private void executeAction(int actionType) throws {
+        try {
+            switch (actionType) {
+                case 0:
                     this.hero.consume();
-                } catch (ConsumeNullException e){
-                    System.out.println("Warning: no consumable have been equipped");
-                }
-                break;
-            case 1:
-                try{
+                    break;
+                case 1:
                     int damages = hero.attack();
                     int realDamages = this.monster.getHitWith(damages);
-                    System.out.println("!!! "+hero.getName()+" attacks "+monster.getName()+" with " +
-                            hero.getWeapon().getName()+ " ("+ damages +") !!! -> Effective DMG: "+realDamages+ " PV");
-                } catch (WeaponNullException e){
-                    System.out.println(e.getMessage());
-                    this.monster.getHitWith(0);
-                } catch (WeaponBrokenException e) {
-                    System.out.println("WARNING: " + e.getMessage());
-                } catch (StaminaEmptyException e) {
-                    e.printStackTrace();
-                }
-                break;
-            case 2:
-                this.hero.fastDrink();
-                break;
-            case 3:
-                this.hero.fastEat();
-                break;
-            case 4:
-                this.hero.fastRepair();
-                break;
+                    System.out.println("!!! " + hero.getName() + " attacks " + monster.getName() + " with " +
+                            hero.getWeapon().getName() + " (" + damages + ") !!! -> Effective DMG: " + realDamages + " PV");
+                    break;
+                case 2:
+                    this.hero.fastDrink();
+                    break;
+                case 3:
+                    this.hero.fastEat();
+                    break;
+                case 4:
+                    this.hero.fastRepair();
+                    break;
+            }
+        } catch (ConsumeEmptyException | StaminaEmptyException | ConsumeNullException | WeaponBrokenException | WeaponNullException e) {
+            System.out.println("WARNING: " + e.getMessage());
         }
     }
 

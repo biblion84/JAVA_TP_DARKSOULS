@@ -8,10 +8,7 @@ import lsg.consumables.Consumable;
 import lsg.consumables.drinks.Drink;
 import lsg.consumables.food.Food;
 import lsg.consumables.repair.RepairKit;
-import lsg.exceptions.ConsumeNullException;
-import lsg.exceptions.StaminaEmptyException;
-import lsg.exceptions.WeaponBrokenException;
-import lsg.exceptions.WeaponNullException;
+import lsg.exceptions.*;
 import lsg.helpers.Dice;
 import lsg.weapons.Weapon;
 
@@ -340,7 +337,7 @@ public abstract class Character {
         return this.buffItems;
     };
 
-    private void drink(Drink drink){
+    private void drink(Drink drink) throws ConsumeEmptyException {
         System.out.println(String.format("%s drinks %s", this.getName(), drink));
         int drinkStamina = drink.use();
         this.setStamina(this.getStamina() + drinkStamina);
@@ -348,7 +345,7 @@ public abstract class Character {
         System.out.println(String.format("Après utilisation : %s", drink));
     }
 
-    private void eat(Food food){
+    private void eat(Food food) throws ConsumeEmptyException {
         System.out.println(String.format("%s eats %s", this.getName(), food));
         int foodLife =  food.use();
         this.setLife(this.getLife() + foodLife);
@@ -356,7 +353,7 @@ public abstract class Character {
         System.out.println(String.format("Après utilisation : %s", food));
     }
 
-    public void use(Consumable consumable) throws ConsumeNullException {
+    public void use(Consumable consumable) throws ConsumeNullException, ConsumeEmptyException {
         if (consumable == null){
             throw new ConsumeNullException(consumable);
         }
@@ -395,11 +392,11 @@ public abstract class Character {
         Consumable = consumable;
     }
 
-    public void consume() throws ConsumeNullException {
+    public void consume() throws ConsumeNullException, ConsumeEmptyException {
         this.use(getConsumable());
     }
 
-    private <T extends Consumable> Consumable FastUseFirst(Class<T> type) throws ConsumeNullException {
+    private <T extends Consumable> Consumable FastUseFirst(Class<T> type) throws ConsumeNullException, ConsumeEmptyException {
         for (Collectible item : this.bag.getItems()){
             if (type.isInstance(item) ){
                 Consumable c = (Consumable)item;
@@ -414,21 +411,21 @@ public abstract class Character {
         throw new ConsumeNullException(null);
     }
 
-    public Drink fastDrink() throws ConsumeNullException {
+    public Drink fastDrink() throws ConsumeNullException, ConsumeEmptyException {
         Drink drink = (Drink)this.FastUseFirst(Drink.class);
         System.out.println(String.format("%s drink FAST", this.getName()));
         System.out.println(String.format("%s drink %s", this.getName(), drink));
         return drink;
     }
 
-    public Food fastEat() throws ConsumeNullException {
+    public Food fastEat() throws ConsumeNullException, ConsumeEmptyException {
         Food food = (Food)this.FastUseFirst(Food.class);
         System.out.println(String.format("%s eat FAST", this.getName()));
         System.out.println(String.format("%s eat %s", this.getName(), food));
         return food;
     }
 
-    public RepairKit fastRepair() throws ConsumeNullException {
+    public RepairKit fastRepair() throws ConsumeNullException, ConsumeEmptyException {
         RepairKit repairKit = (RepairKit)this.FastUseFirst(RepairKit.class);
         System.out.println(String.format("%s repair FAST", this.getName()));
         System.out.println(String.format("%s repair %s", this.getName(), repairKit));

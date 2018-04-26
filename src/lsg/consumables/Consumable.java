@@ -1,6 +1,7 @@
 package lsg.consumables;
 
 import lsg.bags.Collectible;
+import lsg.exceptions.ConsumeEmptyException;
 
 import java.util.Locale;
 
@@ -40,7 +41,12 @@ public abstract class Consumable implements Collectible {
         this.capacity = capacity;
     }
 
-    public int use() {
+    public int use() throws ConsumeEmptyException {
+
+	    if (getCapacity() == 0){
+	        throw new ConsumeEmptyException();
+        }
+
 	    int cap = getCapacity();
 	    setCapacity(0);
 	    return cap;
