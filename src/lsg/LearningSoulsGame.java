@@ -36,7 +36,7 @@ public class LearningSoulsGame {
         System.out.println(BULLET_POINT + "WEAPON : " + monster.getWeapon());
     }
 
-    private void executeAction(int actionType) throws {
+    private void executeAction(int actionType) {
         try {
             switch (actionType) {
                 case 0:
