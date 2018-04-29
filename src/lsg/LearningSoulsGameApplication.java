@@ -6,22 +6,35 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lsg.characters.Hero;
+import lsg.characters.Zombie;
 import lsg.graphics.CSSFactory;
 import lsg.graphics.ImageFactory;
 import lsg.graphics.panes.AnimationPane;
 import lsg.graphics.panes.CreationPane;
+import lsg.graphics.panes.HUDPane;
 import lsg.graphics.panes.TitlePane;
+import lsg.graphics.widgets.characters.renderers.HeroRenderer;
+import lsg.graphics.widgets.characters.renderers.ZombieRenderer;
 import lsg.graphics.widgets.texts.GameLabel;
+import lsg.weapons.Sword;
 
 public class LearningSoulsGameApplication extends javafx.application.Application {
 
     private Scene scene;
     private AnchorPane root;
     private Stage stage;
-    private TitlePane gameTitle;
     private CreationPane creationPane;
-    private String heroName;
     private AnimationPane animationPane;
+    private HUDPane hudPane;
+
+    private TitlePane gameTitle;
+    private String heroName;
+
+    private Hero hero;
+    private HeroRenderer heroRenderer;
+    private Zombie zombie;
+    private ZombieRenderer zombieRenderer;
 
 
     @Override
@@ -56,6 +69,15 @@ public class LearningSoulsGameApplication extends javafx.application.Application
         root.getChildren().add(creationPane);
 
         animationPane = new AnimationPane(root);
+
+        hudPane = new HUDPane();
+        AnchorPane.setLeftAnchor(hudPane, 0.0);
+        hudPane.setMinHeight(scene.getHeight());
+        hudPane.setMinWidth(scene.getWidth());
+        AnchorPane.setTopAnchor(hudPane, (scene.getHeight()/2) - 70);
+        AnchorPane.setLeftAnchor(hudPane, scene.getWidth()/2);
+
+
     }
 
     private void startGame(){
@@ -87,6 +109,25 @@ public class LearningSoulsGameApplication extends javafx.application.Application
 
     private void play() {
         root.getChildren().add(animationPane);
-        animationPane.startDemo();
+        root.getChildren().add(hudPane);
+
+        createHero();
+        createZombie( event -> {
+            hudPane.getMessagePane().showMessage("FIGHT !");
+        });
     }
+
+    private void createHero(){
+        hero = new Hero(heroName);
+        hero.setWeapon(new Sword());
+        heroRenderer = animationPane.createHeroRenderer();
+        heroRenderer.goTo(animationPane.getPrefWidth()*0.5 - heroRenderer.getFitWidth()*0.65, null);
+    }
+
+    private void createZombie(EventHandler<ActionEvent> finishedHandler){
+        zombie = new Zombie();
+        zombieRenderer = animationPane.createZombieRenderer() ;
+        zombieRenderer.goTo(animationPane.getPrefWidth()*0.5 - zombieRenderer.getBoundsInLocal().getWidth() * 0.15, finishedHandler);
+    }
+
 }

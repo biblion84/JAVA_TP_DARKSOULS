@@ -14,14 +14,19 @@ public class Monster extends Character {
      * @param name le nom du monstre
      */
     public Monster(String name){
-        this.name = name;
-        this.life = 10;
-        this.maxLife = 10;
-        this.stamina = 10;
-        this.maxStamina = 10;
+        this(name, 100, 100, 10, 10);
         this.skinThickness = 20;
         this.buffItems = new BuffItem[MAX_BUFF_PIECES];
     }
+
+    public Monster(String name,
+                   int life,
+                   int maxLife,
+                   int stamina,
+                   int maxStamina){
+        super(name, life, maxLife, stamina, maxStamina);
+    }
+
 
     /**
      * Constructeur par défaut retournant un monstre

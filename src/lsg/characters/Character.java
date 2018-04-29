@@ -28,6 +28,18 @@ public abstract class Character {
         this.bag = new SmallBag();
     }
 
+    public Character(String name,
+            int life,
+            int maxLife,
+            int stamina,
+            int maxStamina){
+        this.name = name;
+        this.life = life;
+        this.maxLife = maxLife;
+        this.stamina = stamina;
+        this.maxStamina = maxStamina;
+    }
+
     /**
      * Ajouter un objet dans l'inventaire
      * @param item
