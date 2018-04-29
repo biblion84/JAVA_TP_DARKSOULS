@@ -54,15 +54,15 @@ public class StatBar extends BorderPane {
         lifeBar = new ProgressBar();
         lifeBar.setMaxWidth(Double.MAX_VALUE);
         lifeBar.setMinWidth(Control.USE_PREF_SIZE);
-        setStyle("-fx-background-color: red");
+        lifeBar.setStyle("-fx-accent: red");
         vBox.getChildren().add(lifeBar);
         HBox.setHgrow(lifeBar, Priority.ALWAYS);
 
 
         stamBar = new ProgressBar();
-        stamBar.setMaxWidth(Double.MAX_VALUE);
+        stamBar.setMaxWidth(lifeBar.getWidth() - 40);
         stamBar.setMinWidth(Control.USE_PREF_SIZE);
-        setStyle("-fx-accent: green");
+        stamBar.setStyle("-fx-accent: green");
         vBox.getChildren().add(stamBar);
 
         getChildren().add(hbox);

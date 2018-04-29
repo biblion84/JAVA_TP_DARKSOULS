@@ -3,3 +3,8 @@
     -fx-background-repeat: no-repeat;
     -fx-background-size: 100% 100%;
 }
+
+.green-bar  { -fx-accent: green;  }
+.yellow-bar { -fx-accent: yellow; }
+.orange-bar { -fx-accent: orange; }
+.red-bar    { -fx-accent: red;    }

@@ -8,6 +8,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lsg.characters.Hero;
 import lsg.characters.Zombie;
+import lsg.exceptions.StaminaEmptyException;
+import lsg.exceptions.WeaponBrokenException;
+import lsg.exceptions.WeaponNullException;
 import lsg.graphics.CSSFactory;
 import lsg.graphics.ImageFactory;
 import lsg.graphics.panes.AnimationPane;
@@ -112,8 +115,13 @@ public class LearningSoulsGameApplication extends javafx.application.Application
         createHero();
         createZombie( event -> {
             hudPane.getMessagePane().showMessage("FIGHT !");
+            try {
+                zombie.getHitWith((hero.attack() % 10) + 1);
+            } catch (WeaponNullException | WeaponBrokenException | StaminaEmptyException e) {
+                hudPane.getMessagePane().showMessage(e.getMessage());
+            }
+
         });
-        hudPane.buildTop(hero, zombie);
     }
 
     private void createHero(){
@@ -121,12 +129,18 @@ public class LearningSoulsGameApplication extends javafx.application.Application
         hero.setWeapon(new Sword());
         heroRenderer = animationPane.createHeroRenderer();
         heroRenderer.goTo(animationPane.getPrefWidth()*0.5 - heroRenderer.getFitWidth()*0.65, null);
+        hudPane.buildHero(hero);
+        hudPane.getHeroStatBar().getLifeBar().progressProperty().bind(hero.lifeRateProperty());
+        hudPane.getHeroStatBar().getStamBar().progressProperty().bind(hero.staminaRateProperty());
     }
 
     private void createZombie(EventHandler<ActionEvent> finishedHandler){
         zombie = new Zombie();
         zombieRenderer = animationPane.createZombieRenderer() ;
         zombieRenderer.goTo(animationPane.getPrefWidth()*0.5 - zombieRenderer.getBoundsInLocal().getWidth() * 0.15, finishedHandler);
+        hudPane.buildMonster(zombie);
+        hudPane.getMonsterStatBar().getLifeBar().progressProperty().bind(zombie.lifeRateProperty());
+        hudPane.getMonsterStatBar().getStamBar().progressProperty().bind(zombie.staminaRateProperty());
 
     }
 

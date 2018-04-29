@@ -11,8 +11,11 @@ public class HUDPane extends BorderPane {
     private StatBar heroStatBar;
     private StatBar monsterStatBar;
 
+    private BorderPane topPane;
+
     public HUDPane(){
         buildCenter();
+        buildTop();
     }
 
     public MessagePane getMessagePane() {
@@ -24,14 +27,28 @@ public class HUDPane extends BorderPane {
         setCenter(messagePane);
     }
 
-    public void buildTop(lsg.characters.Character hero, lsg.characters.Character zombie){
-        BorderPane topPane = new BorderPane();
+    private void buildTop(){
+        topPane = new BorderPane();
         setTop(topPane);
+    }
 
+    public void buildHero(lsg.characters.Character hero){
         heroStatBar = new StatBar(hero);
         topPane.setLeft(heroStatBar);
+    }
 
-        monsterStatBar = new StatBar(zombie);
+    public void buildMonster(lsg.characters.Character monster){
+        monsterStatBar = new StatBar(monster);
         topPane.setRight(monsterStatBar);
+    }
+
+
+
+    public StatBar getHeroStatBar() {
+        return heroStatBar;
+    }
+
+    public StatBar getMonsterStatBar() {
+        return monsterStatBar;
     }
 }

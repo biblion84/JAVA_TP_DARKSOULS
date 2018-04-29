@@ -1,5 +1,6 @@
 package lsg.characters;
 
+import javafx.beans.property.SimpleDoubleProperty;
 import lsg.bags.Bag;
 import lsg.bags.Collectible;
 import lsg.bags.SmallBag;
@@ -24,6 +25,9 @@ public abstract class Character {
     protected Consumable Consumable;
     private Bag bag;
 
+    private SimpleDoubleProperty lifeRate = new SimpleDoubleProperty();
+    private SimpleDoubleProperty staminaRate = new SimpleDoubleProperty();
+
     public Character() {
         this.bag = new SmallBag();
     }
@@ -38,6 +42,7 @@ public abstract class Character {
         this.maxLife = maxLife;
         this.stamina = stamina;
         this.maxStamina = maxStamina;
+
     }
 
     /**
@@ -325,6 +330,7 @@ public abstract class Character {
         } else {
             this.life = life;
         }
+        lifeRate.set(life/maxLife);
     }
 
     public int getMaxLife() {
@@ -348,6 +354,7 @@ public abstract class Character {
             this.stamina = stamina;
 
         }
+        staminaRate.set(stamina/maxStamina);
     }
 
     public int getMaxStamina() {
@@ -477,5 +484,16 @@ public abstract class Character {
         System.out.println(String.format("%s repair FAST", this.getName()));
         System.out.println(String.format("%s repair %s", this.getName(), repairKit));
         return repairKit;
+    }
+
+    public SimpleDoubleProperty lifeRateProperty() {
+        lifeRate.set(life/maxLife);
+        return lifeRate;
+    }
+
+
+    public SimpleDoubleProperty staminaRateProperty() {
+        staminaRate.set(stamina/maxStamina);
+        return staminaRate;
     }
 }
