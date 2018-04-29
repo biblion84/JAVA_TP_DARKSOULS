@@ -7,6 +7,8 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lsg.graphics.CSSFactory;
+import lsg.graphics.ImageFactory;
+import lsg.graphics.panes.AnimationPane;
 import lsg.graphics.panes.CreationPane;
 import lsg.graphics.panes.TitlePane;
 import lsg.graphics.widgets.texts.GameLabel;
@@ -19,6 +21,8 @@ public class LearningSoulsGameApplication extends javafx.application.Application
     private TitlePane gameTitle;
     private CreationPane creationPane;
     private String heroName;
+    private AnimationPane animationPane;
+
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -51,13 +55,16 @@ public class LearningSoulsGameApplication extends javafx.application.Application
         creationPane.setOpacity(0);
         root.getChildren().add(creationPane);
 
-
+        animationPane = new AnimationPane(root);
     }
 
     private void startGame(){
         gameTitle.ZoomIn(event -> {
             creationPane.FadeIn(callbackHell -> {
-                System.out.println("Fade terminé !");
+                ImageFactory.preloadAll(() -> {
+                    System.out.println("préchargement des images terminé !");
+
+                });
             });
         });
 
@@ -72,8 +79,14 @@ public class LearningSoulsGameApplication extends javafx.application.Application
                 System.out.println("Nom du héro " + heroName);
                 root.getChildren().remove(creationPane);
                 gameTitle.ZoomOut(zoomedOut -> {
+                    play();
                 });
             }
         });
+    }
+
+    private void play() {
+        root.getChildren().add(animationPane);
+        animationPane.startDemo();
     }
 }
