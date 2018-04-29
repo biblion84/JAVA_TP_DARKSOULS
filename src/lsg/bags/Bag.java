@@ -8,6 +8,10 @@ public class Bag {
     private HashSet<Collectible> items;
 
     public static void transfer(Bag from, Bag into){
+        if (from == null || into == null){
+            return;
+        }
+
         for (Collectible collectible: from.getItems()){
             if (into.push(collectible)){
                 from.pop(collectible);

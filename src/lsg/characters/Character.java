@@ -32,7 +32,10 @@ public abstract class Character {
      * Ajouter un objet dans l'inventaire
      * @param item
      */
-    public void pickUp(Collectible item) {
+    public void pickUp(Collectible item) throws NoBagException {
+        if (this.bag == null){
+            throw new NoBagException();
+        }
         if (this.bag.push(item)) {
             System.out.println(String.format("%s picks up %s", getName(), item));
         } else {
@@ -45,7 +48,10 @@ public abstract class Character {
      * @param item
      * @return
      */
-    public Collectible pullOut(Collectible item) {
+    public Collectible pullOut(Collectible item) throws NoBagException {
+        if (this.bag == null){
+            throw new NoBagException();
+        }
         Collectible col = this.bag.pop(item);
         if ( col != null) {
             System.out.println(String.format("%s pulls out %s", getName(), item));
@@ -62,7 +68,10 @@ public abstract class Character {
         System.out.println(this.bag);
     }
 
-    public int getBagWeight() {
+    public int getBagWeight() throws NoBagException {
+        if (this.bag == null){
+            throw new NoBagException();
+        }
         return this.bag.getWeight();
     }
 
@@ -74,7 +83,11 @@ public abstract class Character {
     public Bag setBag(Bag bag){
         Bag oldBag = this.bag;
         Bag.transfer(oldBag, bag);
-        System.out.println(String.format("%s changes %s for %s", this.name, oldBag, bag));
+        if (bag != null){
+            System.out.println(String.format("%s changes %s for %s", this.name, oldBag, bag));
+        } else {
+            System.out.println(String.format("%s changes %s for %s", this.name, oldBag, "null"));
+        }
         return oldBag;
     }
 
@@ -82,14 +95,20 @@ public abstract class Character {
      * equipe une arme de l'inventaire
      * @param weapon
      */
-    public void equip(Weapon weapon) {
+    public void equip(Weapon weapon) throws NoBagException {
+        if (this.bag == null){
+            throw new NoBagException();
+        }
         if(this.bag.contains(weapon)){
             this.setWeapon(weapon);
             System.out.println(String.format("%s equips weapon %s", this.name, weapon));
         }
     }
 
-    public void equip(Consumable consumable) {
+    public void equip(Consumable consumable) throws NoBagException {
+        if (this.bag == null){
+            throw new NoBagException();
+        }
         if(this.bag.contains(consumable)){
             this.setConsumable(consumable);
             System.out.println(String.format("%s equips consumable %s", this.name, consumable));
@@ -100,7 +119,10 @@ public abstract class Character {
      * Retourne une liste d'objet contenus dans le sacs
      * @return
      */
-    public Collectible[] getBagItems() {
+    public Collectible[] getBagItems() throws NoBagException {
+        if (this.bag == null){
+            throw new NoBagException();
+        }
         return this.bag.getItems();
     }
 
@@ -108,7 +130,10 @@ public abstract class Character {
      * Retourne la taille du sac du personnage
      * @return
      */
-    public int getBagCapacity() {
+    public int getBagCapacity() throws NoBagException {
+        if (this.bag == null){
+            throw new NoBagException();
+        }
         return this.bag.getCapacity();
     }
 
