@@ -89,7 +89,7 @@ public class LearningSoulsGameApplication extends javafx.application.Application
         });
 
 
-        System.out.println("Animation lancée !");
+        System.out.println("Animation lancée !");//
     }
 
     private void addListeners() {
