@@ -4,6 +4,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lsg.graphics.CSSFactory;
+import lsg.graphics.widgets.texts.GameLabel;
 
 public class LearningSoulsGameApplication extends javafx.application.Application {
 
@@ -19,11 +20,15 @@ public class LearningSoulsGameApplication extends javafx.application.Application
         scene = new Scene(root, 1200, 800);
         stage.setScene(scene);
         stage.setResizable(false);
+        root.getChildren().addAll(new GameLabel("Test d'utilisation de Label"));
+
         builUI();
+
         stage.show();
+
     }
 
     private void builUI() {
-        scene.setUserAgentStylesheet(CSSFactory.getStyleSheet("LSG.css"));
+        scene.getStylesheets().add(CSSFactory.getStyleSheet("LSG.css"));
     }
 }
