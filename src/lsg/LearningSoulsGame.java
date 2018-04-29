@@ -60,6 +60,8 @@ public class LearningSoulsGame {
             }
         } catch (ConsumeEmptyException | StaminaEmptyException | ConsumeNullException | WeaponBrokenException | WeaponNullException e) {
             System.out.println("WARNING: " + e.getMessage());
+        } catch (ConsumeRepairNullWeaponException e){
+            System.out.println("IMPOSSIBLE ACTION: no weapon have been equiped");
         }
     }
 
