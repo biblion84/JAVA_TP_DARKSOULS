@@ -46,4 +46,21 @@ public class TitlePane extends VBox {
         pt.play();
     }
 
+    public void ZoomOut(EventHandler<ActionEvent> finishedHandler) {
+        ScaleTransition st = new ScaleTransition(ANIMATION_DURATION);
+        st.setToX(1);
+        st.setToY(1);
+
+        TranslateTransition tt = new TranslateTransition(ANIMATION_DURATION);
+        tt.setToY(10);
+
+        ParallelTransition pt = new ParallelTransition(tt, st);
+        pt.setNode(titleLabel);
+        pt.setCycleCount(1);
+        pt.setOnFinished(event -> {
+            finishedHandler.handle(event);
+        });
+        pt.play();
+    }
+
 }
