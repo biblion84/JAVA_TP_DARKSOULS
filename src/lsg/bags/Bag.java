@@ -1,5 +1,7 @@
 package lsg.bags;
 
+import lsg.exceptions.BagFullException;
+
 import java.util.HashSet;
 
 public class Bag {
@@ -7,7 +9,7 @@ public class Bag {
     private int weight;
     private HashSet<Collectible> items;
 
-    public static void transfer(Bag from, Bag into){
+    public static void transfer(Bag from, Bag into) throws BagFullException {
         if (from == null || into == null){
             return;
         }
@@ -38,12 +40,12 @@ public class Bag {
         return weight;
     }
 
-    public boolean push(Collectible collectible){
+    public boolean push(Collectible collectible) throws BagFullException {
         if (collectible.getWeight() < getCapacity() - getWeight()){
             this.items.add(collectible);
             return true;
         }
-        return false;
+        throw new BagFullException(this);
     }
 
     public Collectible pop(Collectible collectible){

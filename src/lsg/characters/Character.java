@@ -32,7 +32,7 @@ public abstract class Character {
      * Ajouter un objet dans l'inventaire
      * @param item
      */
-    public void pickUp(Collectible item) throws NoBagException {
+    public void pickUp(Collectible item) throws NoBagException, BagFullException {
         if (this.bag == null){
             throw new NoBagException();
         }
@@ -80,7 +80,7 @@ public abstract class Character {
      * @param bag
      * @return
      */
-    public Bag setBag(Bag bag){
+    public Bag setBag(Bag bag) throws BagFullException {
         Bag oldBag = this.bag;
         Bag.transfer(oldBag, bag);
         if (bag != null){
