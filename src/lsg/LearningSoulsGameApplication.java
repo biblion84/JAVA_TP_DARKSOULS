@@ -3,23 +3,27 @@ package lsg;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lsg.graphics.CSSFactory;
 
 public class LearningSoulsGameApplication extends javafx.application.Application {
 
     private Scene scene;
     private AnchorPane root;
+    private Stage stage;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        primaryStage.setTitle("Learning Souls Game");
+        stage = primaryStage;
+        stage.setTitle("Learning Souls Game");
         root = new AnchorPane();
         scene = new Scene(root, 1200, 800);
-        primaryStage.setScene(scene);
-        primaryStage.setResizable(false);
+        stage.setScene(scene);
+        stage.setResizable(false);
         builUI();
-        primaryStage.show();
+        stage.show();
     }
 
     private void builUI() {
+        scene.setUserAgentStylesheet(CSSFactory.getStyleSheet("LSG.css"));
     }
 }
