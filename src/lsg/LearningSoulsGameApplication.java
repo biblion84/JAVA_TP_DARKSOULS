@@ -71,11 +71,9 @@ public class LearningSoulsGameApplication extends javafx.application.Application
         animationPane = new AnimationPane(root);
 
         hudPane = new HUDPane();
-        AnchorPane.setLeftAnchor(hudPane, 0.0);
         hudPane.setMinHeight(scene.getHeight());
         hudPane.setMinWidth(scene.getWidth());
-        AnchorPane.setTopAnchor(hudPane, (scene.getHeight()/2) - 70);
-        AnchorPane.setLeftAnchor(hudPane, scene.getWidth()/2);
+
 
 
     }
@@ -115,6 +113,7 @@ public class LearningSoulsGameApplication extends javafx.application.Application
         createZombie( event -> {
             hudPane.getMessagePane().showMessage("FIGHT !");
         });
+        hudPane.buildTop(hero, zombie);
     }
 
     private void createHero(){
@@ -128,6 +127,7 @@ public class LearningSoulsGameApplication extends javafx.application.Application
         zombie = new Zombie();
         zombieRenderer = animationPane.createZombieRenderer() ;
         zombieRenderer.goTo(animationPane.getPrefWidth()*0.5 - zombieRenderer.getBoundsInLocal().getWidth() * 0.15, finishedHandler);
+
     }
 
 }
